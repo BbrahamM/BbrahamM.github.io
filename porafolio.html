@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abraham Carbajal García | Senior Software Engineer</title>
+    
+    <!-- Google Fonts for a clean, modern aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Prism.js for native C# Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        :root {
+            /* GitHub Dark Mode inspired palette */
+            --bg-main: #0d1117;
+            --bg-card: #161b22;
+            --bg-nav: rgba(13, 17, 23, 0.95);
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #1f6feb;
+            --border: #30363d;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: var(--bg-nav);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        header {
+            padding: 120px 20px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 { font-size: 3rem; color: #ffffff; margin-bottom: 10px; }
+        h2 { font-size: 1.5rem; color: var(--text-muted); font-weight: 400; margin-bottom: 20px; }
+        
+        .location {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #238636; /* GitHub Success Green */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        
+        .btn:hover { background: #2ea043; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+        .btn-outline:hover { background: var(--border); }
+
+        /* Tech Stack Grid */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: left;
+        }
+
+        .tech-col h3 { font-size: 1rem; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+        .tech-col ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
+        .tech-col li { margin-bottom: 5px; }
+
+        /* Main Content */
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 2rem; color: #ffffff; margin: 60px 0 30px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+
+        /* Case Studies */
+        .case-study {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .case-study h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 5px; }
+        .case-study .subtitle { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; display: block; }
+        
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .problem-solution strong { color: #ffffff; }
+        .case-study ul { margin-left: 20px; margin-bottom: 20px; }
+        
+        /* Media Placeholders */
+        .media-container {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Code Block override */
+        pre[class*="language-"] {
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            margin: 20px 0 0 0;
+        }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 50px; }
+
+        @media (min-width: 768px) {
+            .problem-solution { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#console">Console Architecture</a>
+        <a href="#tooling">Custom Tooling</a>
+        <a href="#ue5">Unreal Engine 5</a>
+    </nav>
+
+    <header id="about">
+        <h1>Abraham Carbajal García</h1>
+        <h2>Senior Engine & Systems Programmer</h2>
+        <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
+        
+        <div class="buttons">
+            <a href="LINK_TO_YOUR_PDF_CV_IN_GOOGLE_DRIVE" target="_blank" class="btn">📥 Download Resume (PDF)</a>
+            <a href="YOUR_GITHUB_LINK" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+            <a href="YOUR_LINKEDIN_LINK" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech-col">
+                <h3>Core Languages</h3>
+                <ul>
+                    <li>C# (Expert)</li>
+                    <li>C++ (Advanced)</li>
+                    <li>Python (Tools)</li>
+                </ul>
+            </div>
+            <div class="tech-col">
+                <h3>Engines</h3>
+                <ul>
+                    <li>Unity 3D</li>
+                    <li>Unreal Engine 5</li>
+                </ul>
+            </div>
+            <div class="tech-col">
+                <h3>Architecture</h3>
+                <ul>
+                    <li>SOLID Principles</li>
+                    <li>.asmdef & Modules</li>
+                    <li>Task-Based Async</li>
+                </ul>
+            </div>
+            <div class="tech-col">
+                <h3>Pipelines</h3>
+                <ul>
+                    <li>Addressables</li>
+                    <li>Nintendo Lotcheck</li>
+                    <li>Wwise Audio</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project 1: Console Architecture -->
+        <h2 class="section-title" id="console">Console Compliance & Memory Architecture</h2>
+        
+        <div class="case-study">
+            <h3>The 257th Element</h3>
+            <span class="subtitle">Shipped Title | Nintendo Switch & PC | Unity, C#, Addressables, UniTask</span>
+            
+            <div class="problem-solution">
+                <p><strong>The Challenge:</strong> The Nintendo Switch has a strict memory budget, and the game featured thousands of high-resolution portraits and dual-language (English/Japanese) Wwise audio banks that caused frame hitches during load sequences.</p>
+                <p><strong>The Solution:</strong> I ripped out monolithic resource loading and architected an asynchronous, chunk-based streaming system. By enforcing strict <code>CancellationToken</code> lifecycle management, assets were deterministically released during chapter transitions.</p>
+                <p><strong>The Result:</strong> Passed <strong>Nintendo Lotcheck</strong> memory profiling with zero memory leaks, locking stable frame rates during heavy narrative sequences.</p>
+            </div>
+
+            <!-- Native Syntax Highlighting for C# -->
+<pre><code class="language-csharp">// Memory-Safe Asynchronous Asset Streaming Architecture
+public async UniTask&lt;DialogueData&gt; LoadChapterDataAsync(string assetKey, CancellationToken ct)
+{
+    // 1. Stream asset bundle via Addressables without main thread hitching
+    var handle = Addressables.LoadAssetAsync&lt;TextAsset&gt;(assetKey);
+    var textAsset = await handle.WithCancellation(ct);
+    
+    // 2. Offload heavy string parsing/deserialization to background thread pool
+    return await UniTask.RunOnThreadPool(() => 
+        DataDeserializer.Deserialize(textAsset.text), cancellationToken: ct);
+}</code></pre>
+        </div>
+
+        <!-- Project 2: Developer Tooling -->
+        <h2 class="section-title" id="tooling">Custom Developer Tooling & Automation</h2>
+        
+        <div class="case-study">
+            <h3>妖百景 (Dungeon Crawler)</h3>
+            <span class="subtitle">Shipped Title (Japanese Market) | Custom Editor Tooling, UI Elements, CI/CD</span>
+            
+            <div class="problem-solution">
+                <p><strong>The Challenge:</strong> Designers and translators were manually binding thousands of localized dialogue strings to audio GUIDs, causing massive human error, broken references, and slowing down iteration.</p>
+                <p><strong>The Solution:</strong> Built custom Unity Editor tools that automatically parsed external CSV/Excel localization sheets and enforced data integrity. Engineered a validation pipeline that checked for missing Wwise audio events before allowing a build compilation.</p>
+                <p><strong>The Result:</strong> Reduced narrative integration time from weeks to hours, completely eliminating broken audio links in the final release candidates.</p>
+            </div>
+            
+            <a href="LINK_TO_YOUR_PDF_IN_GOOGLE_DRIVE" target="_blank" class="btn btn-outline" style="font-size: 0.9rem; margin-top: 10px; display: inline-block;">📄 View Pipeline Architecture Specs (PDF)</a>
+        </div>
+
+        <!-- Project 3: UE5 ArchViz -->
+        <h2 class="section-title" id="ue5">Next-Gen Rendering & Engine Versatility</h2>
+        
+        <div class="case-study">
+            <h3>Real-Time Architectural Virtual Tours</h3>
+            <span class="subtitle">Unreal Engine 5 | C++, Blueprints, Nanite, Lumen</span>
+            
+            <!-- Replace the src with your unlisted YouTube link -->
+            <div class="media-container" style="aspect-ratio: 16/9;">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" title="UE5 ArchViz Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="problem-solution">
+                <p><strong>The Challenge:</strong> Streaming massive, unoptimized CAD/BIM architectural datasets in real-time without relying on manual LOD retopology or baked lighting.</p>
+                <p><strong>The Solution:</strong> Integrated <strong>Nanite virtualized geometry</strong> to ingest millions of raw polygons directly from source files. Configured <strong>Lumen global illumination</strong> to provide real-time bounce lighting.</p>
+                <p><strong>The Result:</strong> Delivered a locked 60 FPS interactive walkthrough of a multi-level commercial building, maintaining photorealistic fidelity on mid-tier PC hardware.</p>
+            </div>
+        </div>
+
+        <!-- Async Culture -->
+        <h2 class="section-title">Engineering Culture & Remote Workflow</h2>
+        <div class="case-study" style="border-color: var(--accent);">
+            <p style="margin-bottom: 15px;">Working across international, distributed teams requires more than writing code—it requires deep asynchronous communication discipline:</p>
+            <ul>
+                <li><strong>Documentation First:</strong> I write clear technical specifications and architecture diagrams before coding to ensure cross-timezone alignment.</li>
+                <li><strong>Version Control:</strong> Deep experience with Git workflows, branching strategies, and conducting rigorous, constructive pull request (PR) reviews.</li>
+                <li><strong>Automated Testing:</strong> I utilize the Unity Test Framework (UTF) and headless batchmode testing to catch regressions before they reach the main branch.</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Abraham Carbajal García | Engineered for Global Technical Applications</p>
+    </footer>
+
+    <!-- Prism.js for Syntax Highlighting Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+</body>
+</html>
