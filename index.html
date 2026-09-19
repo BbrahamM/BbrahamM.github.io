@@ -51,6 +51,7 @@
             gap: 20px;
             z-index: 1000;
             backdrop-filter: blur(5px);
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -123,6 +124,24 @@
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         .section-title { font-size: 2rem; color: #ffffff; margin: 60px 0 30px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
 
+        /* Shipped Titles Grid */
+        .shipped-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .shipped-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            border-radius: 6px;
+        }
+        .shipped-card h4 { color: #ffffff; margin-bottom: 5px; font-size: 1.1rem; }
+        .shipped-card .role { color: var(--accent); font-weight: 600; font-size: 0.8rem; margin-bottom: 5px; display: block; }
+        .shipped-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0; }
+
         /* Case Studies */
         .case-study {
             background: var(--bg-card);
@@ -176,8 +195,9 @@
 
     <nav>
         <a href="#about">About</a>
-        <a href="#console">Console Architecture</a>
-        <a href="#tooling">Custom Tooling</a>
+        <a href="#releases">Commercial Releases</a>
+        <a href="#console">Console Compliance</a>
+        <a href="#architecture">Systems Architecture</a>
         <a href="#ue5">Unreal Engine 5</a>
     </nav>
 
@@ -187,9 +207,9 @@
         <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
         
         <div class="buttons">
-            <a href="LINK_TO_YOUR_PDF_CV_IN_GOOGLE_DRIVE" target="_blank" class="btn">📥 Download Resume (PDF)</a>
-            <a href="YOUR_GITHUB_LINK" target="_blank" class="btn btn-outline">🔗 GitHub</a>
-            <a href="YOUR_LINKEDIN_LINK" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+            <a href="https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=sharing" target="_blank" class="btn">📥 Download Resume (PDF)</a>
+            <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+            <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
         </div>
 
         <div class="tech-stack">
@@ -228,6 +248,53 @@
     </header>
 
     <main class="container">
+
+        <!-- Shipped Titles Overview -->
+        <h2 class="section-title" id="releases" style="margin-top: 0;">Commercial Releases</h2>
+        <div class="shipped-grid">
+            
+            <!-- The 257th Element -->
+            <div class="shipped-card">
+                <h4>The 257th Element</h4>
+                <span class="role">Lead Systems Developer</span>
+                <p>Nintendo Switch, PC (Steam)</p>
+                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 5px;">
+                    <a href="https://www.nintendo.es/Juegos/Programas-descargables-Nintendo-Switch/The-257th-Element-2651475.html" target="_blank" style="color: #e60012; font-size: 0.85rem; text-decoration: none; font-weight: 600;">🎮 Nintendo eShop</a>
+                    <a href="https://store.steampowered.com/app/2648640/The_257th_Element/" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600;">🔗 Steam Store</a>
+                </div>
+            </div>
+            
+            <!-- Fate of Windshift -->
+            <div class="shipped-card">
+                <h4>Fate of Windshift</h4>
+                <span class="role">Senior Gameplay & Optimization Eng.</span>
+                <p>PC (3D Turn-Based RPG)</p>
+                <div style="margin-top: 10px;">
+                    <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600;">🔗 Steam Store</a>
+                </div>
+            </div>
+
+            <!-- Windshift -->
+            <div class="shipped-card">
+                <h4>Windshift</h4>
+                <span class="role">Systems Engineer</span>
+                <p>PC (Steam)</p>
+                <div style="margin-top: 10px;">
+                    <a href="https://store.steampowered.com/app/1292200/Sound_of_Windshift_sound_track_vol001/" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600;">🎵 View OST on Steam</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Titles -->
+            <div class="shipped-card">
+                <h4>Bacheton</h4>
+                <span class="role">Solo Dev & Engineer</span>
+                <p>Mobile (Android Endless Runner)</p>
+                <div style="margin-top: 10px;">
+                    <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton" target="_blank" style="color: #3ddc84; font-size: 0.85rem; text-decoration: none; font-weight: 600;">📱 Bacheton - Google Play</a>
+                </div>
+            </div>
+
+        </div>
 
         <!-- Project 1: Console Architecture -->
         <h2 class="section-title" id="console">Platform Abstraction & Save-Data Integrity</h2>
@@ -292,23 +359,24 @@ public void ExecuteIfDirectFileExists()
             
         </div>
 
-        <!-- Project 2: Developer Tooling -->
-        <h2 class="section-title" id="tooling">Custom Developer Tooling & Automation</h2>
+        <!-- Project 2: Core Systems -->
+        <h2 class="section-title" id="architecture">Systems Architecture & Data Flow</h2>
         
         <div class="case-study">
-            <h3>妖百景 (Dungeon Crawler)</h3>
-            <span class="subtitle">Shipped Title (Japanese Market) | Custom Editor Tooling, UI Elements, CI/CD</span>
+            <h3>妖百景 (One Hundred Ghost Scenes)</h3>
+            <span class="subtitle">Unreleased / Internal Pipeline | Battle Systems, Inventory Synchronization, State Machines</span>
             
             <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Designers and translators were manually binding thousands of localized dialogue strings to audio GUIDs, causing massive human error, broken references, and slowing down iteration.</p>
-                <p><strong>The Solution:</strong> Built custom Unity Editor tools that automatically parsed external CSV/Excel localization sheets and enforced data integrity. Engineered a validation pipeline that checked for missing Wwise audio events before allowing a build compilation.</p>
-                <p><strong>The Result:</strong> Reduced narrative integration time from weeks to hours, completely eliminating broken audio links in the final release candidates.</p>
+                <p><strong>The Challenge:</strong> Designing a scalable, turn-based battle system and a robust inventory manager for a dungeon crawler where UI, combat logic, and save states must remain perfectly synchronized without race conditions.</p>
+                <p><strong>The Solution:</strong> Architected a decoupled, event-driven state machine for combat resolution. Implemented a strict data-flow hierarchy for the inventory system, utilizing ScriptableObjects for item definitions and independent controllers for UI rendering and backend save synchronization.</p>
+                <p><strong>The Result:</strong> Delivered a modular architecture where game designers could seamlessly add hundreds of new enemies, skills, and items without requiring engineering intervention or breaking existing data references.</p>
             </div>
             
+            <!-- Link to Architecture HTML Document -->
             <a href="ayakashi-architecture.html" target="_blank" class="btn btn-outline" style="font-size: 0.9rem; margin-top: 10px; display: inline-block;">📄 View Architecture Document</a>
         </div>
 
-       <!-- Project 3: UE5 ArchViz -->
+        <!-- Project 3: UE5 ArchViz -->
         <h2 class="section-title" id="ue5">Next-Gen Rendering & Interactive Environments</h2>
         
         <div class="case-study">
@@ -316,7 +384,7 @@ public void ExecuteIfDirectFileExists()
             <span class="subtitle">Unreal Engine 5 | Nanite, Lumen, Blueprints</span>
             
             <div class="media-container" style="aspect-ratio: 16/9;">
-                <!-- Replace YOUR_VIDEO_ID_HERE with the actual YouTube video ID -->
+                <!-- YouTube Embed with your actual video ID -->
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FkKWbpWVZDA" title="UE5 ArchViz Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
