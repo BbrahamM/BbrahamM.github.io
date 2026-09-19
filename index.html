@@ -234,25 +234,39 @@
         
         <div class="case-study">
             <h3>The 257th Element</h3>
-            <span class="subtitle">Shipped Title | Nintendo Switch & PC | Unity, C#, Addressables, UniTask</span>
+            <span class="subtitle">Shipped Title | Nintendo Switch & PC | Unity, C#, Async Scene Management, Wwise</span>
             
             <div class="problem-solution">
-                <p><strong>The Challenge:</strong> The Nintendo Switch has a strict memory budget, and the game featured thousands of high-resolution portraits and dual-language (English/Japanese) Wwise audio banks that caused frame hitches during load sequences.</p>
-                <p><strong>The Solution:</strong> I ripped out monolithic resource loading and architected an asynchronous, chunk-based streaming system. By enforcing strict <code>CancellationToken</code> lifecycle management, assets were deterministically released during chapter transitions.</p>
-                <p><strong>The Result:</strong> Passed <strong>Nintendo Lotcheck</strong> memory profiling with zero memory leaks, locking stable frame rates during heavy narrative sequences.</p>
+                <p><strong>The Challenge:</strong> We shipped on Nintendo Switch under a hard memory ceiling, with thousands of high-resolution character portraits and fully dual-language (EN/JP) Wwise voice banks. Loading a chapter's audio and art up front spiked memory and stalled the main thread between scenes — exactly the profile that fails a console memory-compliance review.</p>
+                
+                <p><strong>The Solution:</strong> I replaced monolithic loading with a chapter-scoped, asynchronous streaming pipeline. A single orchestration asset resolves the outgoing bank and fires its release before requesting the incoming one. Background artwork and dialogue payloads are streamed via additive <code>LoadSceneAsync</code> inside yielding coroutines, ensuring the main thread is never blocked while the load advances in the background.</p>
+                
+                <p><strong>The Result:</strong> Steady-state memory held inside the Switch budget with zero memory leaks across all episode transitions. Narrative sequences streamed art and dual-language voice banks simultaneously at a locked, stable frame rate, comfortably passing platform certification.</p>
             </div>
 
             <!-- Native Syntax Highlighting for C# -->
-<pre><code class="language-csharp">// Memory-Safe Asynchronous Asset Streaming Architecture
-public async UniTask&lt;DialogueData&gt; LoadChapterDataAsync(string assetKey, CancellationToken ct)
+<pre><code class="language-csharp">// Background Scene Streaming Architecture
+// Yielding every frame ensures the Unity Main Thread remains free during heavy loads
+Application.runInBackground = true;
+StartCoroutine(LoadSceneBackground(data, currentDialogue));
+
+IEnumerator LoadSceneBackground(DialogueData data, int currentDialogue)
 {
-    // 1. Stream asset bundle via Addressables without main thread hitching
-    var handle = Addressables.LoadAssetAsync&lt;TextAsset&gt;(assetKey);
-    var textAsset = await handle.WithCancellation(ct);
+    int currentNumberofScenes = SceneManager.sceneCount;
+
+    // Queue the specific background asset for the upcoming dialogue node
+    list.Add(data.dialogue[currentDialogue].backgroundsLoade.backGroundName);
     
-    // 2. Offload heavy string parsing/deserialization to background thread pool
-    return await UniTask.RunOnThreadPool(() => 
-        DataDeserializer.Deserialize(textAsset.text), cancellationToken: ct);
+    // Invoke Additive LoadSceneAsync operation
+    loadSceneHandeler?.Invoke(list);   
+
+    // Await the scene load asynchronously without stalling the frame rate
+    while (SceneManager.sceneCount == currentNumberofScenes)
+    {
+        yield return null; 
+    }
+
+    sceneCounter++;
 }</code></pre>
         </div>
 
