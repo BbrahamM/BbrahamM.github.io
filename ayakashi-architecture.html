@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>妖百景 - Technical Architecture Document</title>
+<style>
+  /* 1. BASE SETTINGS */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 2. RESPONSIVE SCREEN STYLES (Mobile First) */
+  body { padding: 20px 10px; }
+  
+  .page {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    border-bottom: 2px solid #30363d;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .title { font-size: 1.5rem; font-weight: 700; color: #58a6ff; }
+  .subtitle { font-size: 0.9rem; color: #8b949e; margin-top: 2px; }
+  .badge {
+    background: #1f6feb26; border: 1px solid #388bfd66; color: #58a6ff;
+    padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+    align-self: flex-start;
+  }
+
+  .content { flex-grow: 1; }
+  
+  /* Stack columns on mobile, use grid on desktop */
+  .grid-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .card h3 {
+    color: #f0f6fc; font-size: 1.1rem; margin-bottom: 10px;
+    border-left: 3px solid #58a6ff; padding-left: 8px;
+  }
+  .card p, .card li { font-size: 0.9rem; line-height: 1.5; color: #8b949e; }
+  .card ul { padding-left: 18px; margin-top: 6px; }
+  .card li { margin-bottom: 6px; }
+
+  /* Allow side-scrolling for long code lines on small screens */
+  .code-block {
+    background: #0a0d12; border: 1px solid #21262d; border-radius: 6px;
+    padding: 12px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.8rem; line-height: 1.4; color: #79c0ff;
+    white-space: pre; overflow-x: auto;
+  }
+
+  .footer {
+    border-top: 1px solid #21262d; padding-top: 10px; margin-top: 20px;
+    display: flex; flex-direction: column; gap: 5px;
+    font-size: 0.8rem; color: #484f58; text-align: center;
+  }
+
+  /* 3. DESKTOP SCREEN ADJUSTMENTS */
+  @media (min-width: 768px) {
+    body { padding: 40px 20px; }
+    .header { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+    .badge { align-self: auto; }
+    .grid-2 { display: grid; grid-template-columns: 1.1fr 0.9fr; height: 100%; }
+    .footer { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+
+  /* 4. STRICT PRINT STYLES (For PDF generation) */
+  @page { size: A4 landscape; margin: 0; }
+  
+  @media print {
+    body { padding: 0; }
+    .page {
+      width: 297mm; height: 210mm;
+      padding: 16mm 20mm; margin: 0;
+      border: none; border-radius: 0;
+      page-break-after: always;
+    }
+    .header { flex-direction: row; justify-content: space-between; align-items: flex-end; margin-bottom: 0; }
+    .badge { align-self: auto; font-size: 8pt; padding: 3px 8px; }
+    .title { font-size: 20pt; }
+    .subtitle { font-size: 10pt; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; height: 100%; margin-top: 12px; }
+    .card { padding: 12px 16px; }
+    .card h3 { font-size: 11pt; margin-bottom: 8px; padding-left: 6px; }
+    .card p, .card li { font-size: 8.5pt; line-height: 1.45; }
+    .card ul { margin-top: 4px; padding-left: 14px; }
+    .card li { margin-bottom: 4px; }
+    
+    .code-block { font-size: 7.2pt; line-height: 1.35; padding: 8px; overflow: hidden; }
+    
+    .footer { flex-direction: row; justify-content: space-between; font-size: 7.5pt; margin-top: 0; padding-top: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="title">01. Battle System Architecture</div>
+      <div class="subtitle">妖百景 (Ayakashi Hyakkei) • Turn-Based State Machine & Presentation Decoupling</div>
+    </div>
+    <span class="badge">PAGE 1 / 3</span>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Combat State Machine Flow</h3>
+        <div class="code-block">
+[BATTLE START] ──► BattleManager loads enemy & party resources
+       │
+       ▼
+[1. ROUND INIT] ──► BtlTurnBaseManager.FillRound() filters HP > 0
+       │
+       ▼
+[2. INITIATIVE] ──► CalculateOrderOfAction(): SP = (100 - AGI) * Skill.OFA
+       │
+       ▼
+[3. COMMAND]    ──► SelectAttack() ──► selectingAttacks event
+       │            ├── Item Selection: Reserves stock in itemsUsed[]
+       │            └── RevokeAttack(): Full rollback & item refund
+       ▼
+[4. EXECUTION]  ──► NextAttack() pulls from sorted combat queue
+       │            ├── ReselectTargget() if prior target was defeated
+       │            └── Dispatches beforeApplyAttack event
+       ▼
+[5. RESOLUTION] ──► BtlASkillFormula.Apply() executes STR/TEC damage math
+       │            └── Dispatches afterApplyAttack on animation end
+       ▼
+[6. OUTCOME]    ──► DetectBattleEnd(): Triggers Victory (EXP/Loot) or Defeat
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Decoupling Logic & Presentation</h3>
+        <p><strong>Core Mathematical Model:</strong></p>
+        <ul>
+          <li><code>BtlTurnBaseManager</code> and <code>BtlASkillFormula</code> operate in isolation from Unity transforms, animators, and particles.</li>
+          <li>Hit rates, defense scaling, and damage randomization execute deterministically.</li>
+        </ul>
+        <br>
+        <p><strong>Observer & Event Coordination:</strong></p>
+        <ul>
+          <li><code>beforeApplyAttack</code>: Signals the Cinemachine brain to initiate target framing and screen shake (<code>BtlCameShake</code>).</li>
+          <li><code>ExecuteAttack</code>: Triggers weapon VFX (<code>BtlShowEffectAtTargget</code>) and audio playback asynchronously.</li>
+          <li><code>EndApplyEffect</code>: Dispatched by visual scripts once particle playback finishes, allowing the turn scheduler to dequeue the next unit without stalling the framerate.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Portfolio Architecture Document • Game Systems & Tools</span>
+    <span>Unity • C# • Nintendo Switch</span>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="title">02. Inventory Synchronization</div>
+      <div class="subtitle">妖百景 (Ayakashi Hyakkei) • Data Flow, Atomic Rollbacks & Cross-Platform Persistence</div>
+    </div>
+    <span class="badge">PAGE 2 / 3</span>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Data Flow Pipeline</h3>
+        <div class="code-block">
+[DEFINITIONS]  ScriptableObjects (BtlItem & BtlWearable)
+               Immutable Item Attributes, Max Stock, Stat Multipliers
+                      │
+                      ▼
+[RUNTIME POOL] BtlItemPool (ScriptableObject Runtime Model)
+               • Dictionary&lt;string, ItemIndexer&gt; [O(1) Direct Lookup]
+               • Dictionary&lt;ItemKind, ItemKindDict&gt; [Category Partition]
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+[ACTIVE COMBAT ENGINE]   [UI BINDING & LOCALIZATION]
+  BtlTurnBaseManager       UIDynamicFillManager
+  • Ephemeral itemsUsed[]  • Direct binding to pool counts
+  • Atomic Rollbacks on    • Dynamic JSON strings (EN/JP)
+    action revocation      • Zero UI-side data duplication
+          │                       ▲
+          └───────────┬───────────┘
+                      ▼
+[PERSISTENCE]  SaveSystemManager / SaveSystemSaveSimpleFile
+               ├── PC / Editor: System.IO File Streaming
+               └── Console: Native Switch Save Handlers
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>State Integrity & Synchronization Logic</h3>
+        <p><strong>Atomic Reservation & Turn Revocation:</strong></p>
+        <ul>
+          <li>When players stage item commands in battle, units add the item to an ephemeral <code>itemsUsed</code> queue, decrementing the pool immediately.</li>
+          <li>If the player cancels or targets another unit, <code>RevokeAttack()</code> executes <code>RemoveItemUnUse()</code>, returning reserved counts to <code>BtlItemPool</code> via direct dictionary indexing.</li>
+        </ul>
+        <br>
+        <p><strong>Memory Safety & Zero GC Churn:</strong></p>
+        <ul>
+          <li>Inventories store quantities mapped to canonical ScriptableObject definitions rather than instantiating runtime GameObject wrappers.</li>
+          <li>Texture and sprite assets are loaded via centralized references, preventing memory leaks during scene transitions.</li>
+        </ul>
+        <br>
+        <p><strong>Hardware-Certified Persistence:</strong></p>
+        <ul>
+          <li>Platform-conditional compilation (<code>#if !UNITY_SWITCH</code>) cleanly switches between direct disk I/O and Nintendo Switch native save SDK callbacks.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Portfolio Architecture Document • Game Systems & Tools</span>
+    <span>Unity • C# • Nintendo Switch</span>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="title">03. The Engineering "Why"</div>
+      <div class="subtitle">妖百景 (Ayakashi Hyakkei) • SOLID Principles & Designer Extensibility</div>
+    </div>
+    <span class="badge">PAGE 3 / 3</span>
+  </div>
+
+  <div class="content">
+    <div class="grid-2">
+      <div class="card">
+        <h3>SOLID Design Principles Applied</h3>
+        <ul>
+          <li><strong>Single Responsibility Principle (SRP):</strong> Combat state sequencing (<code>BtlTurnBaseManager</code>), damage formulas (<code>BtlASkillFormula</code>), item management (<code>BtlItemPool</code>), and persistence (<code>SaveSystemManager</code>) are strictly isolated into single-purpose components.</li>
+          <li><strong>Open/Closed Principle (OCP):</strong> Designers create new equipment, skills, and enemy variants purely by adding ScriptableObjects and JSON tables without altering the underlying combat state machine.</li>
+          <li><strong>Liskov Substitution Principle (LSP):</strong> <code>BtlWearable</code> inherits transparently from <code>BtlItem</code>. Inventory systems treat all assets as <code>BtlItem</code> polymorphically, while equipment handlers access <code>WearableType</code> safely.</li>
+          <li><strong>Interface & Event Segregation (ISP):</strong> Decoupled C# Actions (<code>beforeApplyAttack</code>, <code>afterApplyAttack</code>, <code>toDoWhenWin</code>) ensure UI and VFX managers only observe the exact lifecycle hooks they require.</li>
+          <li><strong>Dependency Inversion Principle (DIP):</strong> Combat controllers depend on abstract data classes (<code>CharacterBattleData</code>, <code>ItemPoolData</code>) rather than concrete scene hierarchies.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Production Impact & Designer Velocity</h3>
+        <p><strong>50+ Items Added with Zero C# Modifications:</strong></p>
+        <p>By shifting item parameters, equipment classification, and localization into ScriptableObjects and JSON data schemas, designers populated the entire dungeon crawler compendium without requesting code adjustments or risk of compilation errors.</p>
+        <br>
+        <p><strong>Pluggable Skill Formula Strategy Pattern:</strong></p>
+        <p>Damage and hit-rate routines inherit from <code>BtlASkillFormula</code>. Adding a spell, healing ability, or debuff (e.g. <code>STRDamagePlayer</code>, <code>ApplpyBlindFormula</code>) is as simple as plugging a new formula asset into the skill's inspector slot.</p>
+        <br>
+        <p><strong>Console Compliance & Robustness:</strong></p>
+        <p>Decoupled save and UI subsystems ensured rock-solid 60 FPS performance on Nintendo Switch, cleanly passing platform certification criteria.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Portfolio Architecture Document • Game Systems & Tools</span>
+    <span>Unity • C# • Nintendo Switch</span>
+  </div>
+</div>
+
+</body>
+</html>
