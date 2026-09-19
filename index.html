@@ -230,44 +230,66 @@
     <main class="container">
 
         <!-- Project 1: Console Architecture -->
-        <h2 class="section-title" id="console">Console Compliance & Memory Architecture</h2>
+        <h2 class="section-title" id="console">Platform Abstraction & Save-Data Integrity</h2>
         
         <div class="case-study">
             <h3>The 257th Element</h3>
-            <span class="subtitle">Shipped Title | Nintendo Switch & PC | Unity, C#, Async Scene Management, Wwise</span>
+            <span class="subtitle">Shipped Title | Nintendo Switch & PC | Unity, C#, Nintendo SDK, Wwise</span>
             
             <div class="problem-solution">
-                <p><strong>The Challenge:</strong> We shipped on Nintendo Switch under a hard memory ceiling, with thousands of high-resolution character portraits and fully dual-language (EN/JP) Wwise voice banks. Loading a chapter's audio and art up front spiked memory and stalled the main thread between scenes — exactly the profile that fails a console memory-compliance review.</p>
+                <p><strong>The Challenge:</strong> One Unity codebase, two platforms. On PC, persistence is simply a file write. On Nintendo Switch, every save, setting, and file-existence check must route through Nintendo's native SDK (<code>nn.fs</code>). If the system sleeps or the player exits the title part-way through a write, the save data is corrupted, causing an immediate failure during console certification.</p>
                 
-                <p><strong>The Solution:</strong> I replaced monolithic loading with a chapter-scoped, asynchronous streaming pipeline. A single orchestration asset resolves the outgoing bank and fires its release before requesting the incoming one. Background artwork and dialogue payloads are streamed via additive <code>LoadSceneAsync</code> inside yielding coroutines, ensuring the main thread is never blocked while the load advances in the background.</p>
+                <p><strong>The Solution:</strong> I built a UnityEvent-driven persistence layer with platform-conditional compilation. On Switch, the layer mounts a save-data volume against the preselected player account, then runs every write as an explicit <em>delete → create → open → write → commit</em> transaction. The critical section is guarded by Nintendo SDK exit requests so the OS cannot sleep or close the title mid-write.</p>
                 
-                <p><strong>The Result:</strong> Steady-state memory held inside the Switch budget with zero memory leaks across all episode transitions. Narrative sequences streamed art and dual-language voice banks simultaneously at a locked, stable frame rate, comfortably passing platform certification.</p>
+                <p><strong>The Result:</strong> Achieved rock-solid save-data integrity against mid-write power and sleep events. Delivered a single save pipeline serving both SKUs without duplicating game logic, shipping successfully against Nintendo SDK v18.3.2.</p>
             </div>
 
             <!-- Native Syntax Highlighting for C# -->
-<pre><code class="language-csharp">// Background Scene Streaming Architecture
-// Yielding every frame ensures the Unity Main Thread remains free during heavy loads
-Application.runInBackground = true;
-StartCoroutine(LoadSceneBackground(data, currentDialogue));
+            <div style="margin-bottom: 25px;">
+<pre><code class="language-csharp">// The Critical Section (NintendoManager.cs)
+#if UNITY_SWITCH
+    // OS Exit Guard: Prevents console sleep or quit during transaction
+    UnityEngine.Switch.Notification.EnterExitRequestHandlingSection();
+#endif
 
-IEnumerator LoadSceneBackground(DialogueData data, int currentDialogue)
-{
-    int currentNumberofScenes = SceneManager.sceneCount;
+    result = nn.fs.File.Create(filePath, data.Length);
+    result.abortUnlessSuccess();
 
-    // Queue the specific background asset for the upcoming dialogue node
-    list.Add(data.dialogue[currentDialogue].backgroundsLoade.backGroundName);
+    result = nn.fs.File.Open(ref fileHandle, filePath, nn.fs.OpenFileMode.Write);
+    result.abortUnlessSuccess();
+
+    const int offset = 0;
+    result = nn.fs.File.Write(fileHandle, offset, data, data.LongLength, nn.fs.WriteOption.Flush);
+    result.abortUnlessSuccess();
+
+    nn.fs.File.Close(fileHandle);
     
-    // Invoke Additive LoadSceneAsync operation
-    loadSceneHandeler?.Invoke(list);   
+    // Commit closes the volume transaction as a single unit
+    result = nn.fs.FileSystem.Commit(mountName);
+    result.abortUnlessSuccess();
 
-    // Await the scene load asynchronously without stalling the frame rate
-    while (SceneManager.sceneCount == currentNumberofScenes)
-    {
-        yield return null; 
-    }
+#if UNITY_SWITCH
+    UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
+#endif</code></pre>
+            </div>
 
-    sceneCounter++;
+            <div>
+<pre><code class="language-csharp">// One Call Site, Two Backends (SSExecuteIfFileExists.cs)
+public void ExecuteIfDirectFileExists()
+{
+#if !UNITY_SWITCH
+    // Standard PC Branch
+    if (File.Exists(Application.persistentDataPath + sSDynamicLoadPaths.GetDirectPath()))
+        executeWhenFileExists?.Invoke();
+    else
+        executeWhenFileNotExists?.Invoke();
+#else
+    // Nintendo Switch Native Delegation
+    ifFileExistNintendo?.Invoke(sSDynamicLoadPaths.GetDirectPath());
+#endif
 }</code></pre>
+            </div>
+            
         </div>
 
         <!-- Project 2: Developer Tooling -->
