@@ -19,7 +19,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
 
         body {
@@ -31,7 +31,7 @@
         /* HERO SECTION */
         header {
             padding: 80px 20px;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             text-align: left;
             border-bottom: 1px solid #374151;
@@ -54,7 +54,7 @@
         .hero-text {
             color: var(--text-muted);
             font-size: 1.05rem;
-            max-width: 700px;
+            max-width: 800px;
             margin-bottom: 30px;
         }
 
@@ -75,7 +75,7 @@
 
         /* MAIN CONTENT CONTAINER */
         main {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 60px 20px;
         }
@@ -90,9 +90,9 @@
         /* GRID LAYOUT FOR PROJECTS */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 24px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .card {
@@ -100,7 +100,9 @@
             border: 1px solid #374151;
             border-radius: 8px;
             padding: 24px;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -127,6 +129,7 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .card-links a {
@@ -146,6 +149,7 @@
 
         .card-links .nintendo { color: #e60012; }
         .card-links .steam { color: #66c0f4; }
+        .card-links .playstore { color: #3ddc84; }
 
         /* SKILL CHIPS */
         .skills {
@@ -180,6 +184,7 @@
             color: var(--text-muted);
             border-top: 1px solid #374151;
             font-size: 0.9rem;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -195,7 +200,7 @@
     </header>
 
     <main>
-        <h2>Commercial Releases</h2>
+        <h2>Commercial Releases & Independent Projects</h2>
         <div class="grid-container">
             
             <!-- 妖百景 (One Hundred Ghost Scenes) -->
@@ -243,7 +248,49 @@
                 </div>
             </div>
 
-        </div>
+            <!-- Windshift -->
+            <div class="card">
+                <h3>Windshift</h3>
+                <span class="role">Gameplay Engineer</span>
+                <div class="skills">
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">State Machines</span>
+                    <span class="skill-tag">Legacy Refactoring</span>
+                </div>
+                <p>Refactored legacy combat state machines and stabilized core battle logic to support data-driven dialogue pipelines, enabling the design team to scale encounter variety safely.</p>
+                <div class="card-links">
+                    <a href="#" class="steam">🔗 Steam Store</a>
+                </div>
+            </div>
+
+            <!-- Bacheton -->
+            <div class="card">
+                <h3>Bacheton</h3>
+                <span class="role">Independent Developer</span>
+                <div class="skills">
+                    <span class="skill-tag">Procedural Generation</span>
+                    <span class="skill-tag">Unity Ads</span>
+                    <span class="skill-tag">Mobile Publishing</span>
+                </div>
+                <p>Managed the full technical lifecycle of an Android endless runner. Implemented procedural obstacle generation, progressive difficulty curves, and balanced in-game store economies.</p>
+                <div class="card-links">
+                    <a href="#" class="playstore">📱 Google Play Store</a>
+                </div>
+            </div>
+
+            <!-- CAPTAIN AYE AYE! -->
+            <div class="card">
+                <h3>CAPTAIN AYE AYE!</h3>
+                <span class="role">Independent Developer</span>
+                <div class="skills">
+                    <span class="skill-tag">Unity URP</span>
+                    <span class="skill-tag">Shader Graph</span>
+                    <span class="skill-tag">Android</span>
+                </div>
+                <p>Authored technical design and production roadmaps for a 2D mobile title leveraging Unity Universal Render Pipeline (URP), Shader Graph, and custom Tilemap architectures.</p>
+            </div>
+
+        </div> <!-- END OF GRID CONTAINER -->
 
         <!-- NEW COMBAT BALANCING INTERACTIVE SHOWCASE -->
         <div class="showcase-block">
