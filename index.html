@@ -110,7 +110,7 @@
         /* Tech Stack Grid */
         .tech-stack {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -253,7 +253,20 @@
                     <li>Wwise Audio</li>
                 </ul>
             </div>
+            <div class="tech-col">
+                <h3>Game Design</h3>
+                <ul>
+                    <li>Combat Balancing</li>
+                    <li>Progression Data</li>
+                    <li>Math Models</li>
+                </ul>
+            </div>
         </div>
+        
+        <!-- Updated Hero Text -->
+        <p class="hero-text" style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 30px auto 0;">
+            Combining C#/C++ backend architecture with expert-level game design. I bridge the gap between scalable data pipelines and player-facing mechanics, specializing in core systems, combat balancing, custom tooling, and strict console certification (Nintendo Lotcheck) for international titles.
+        </p>
     </header>
 
     <main class="container">
@@ -453,14 +466,13 @@ public void ExecuteIfDirectFileExists()
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if the canvas element exists before trying to draw
             const canvasElement = document.getElementById('expCurveChart');
             if (canvasElement) {
                 const ctx = canvasElement.getContext('2d');
                 
-                // Simulating your Google Sheet math (Exponential EXP Scaling from Lv 1 to Lv 20)
+                // Actual data pulled directly from the "Level Up" spreadsheet for Levels 1-20
                 const levels = Array.from({length: 20}, (_, i) => `Lv ${i + 1}`);
-                const accumulatedExp = Array.from({length: 20}, (_, i) => Math.floor(100 * Math.pow(1.25, i)));
+                const accumulatedExp = [0, 90, 250, 500, 880, 1400, 2080, 2930, 3980, 5280, 6830, 8630, 10760, 13160, 16160, 19460, 23260, 27460, 32430, 38010];
 
                 new Chart(ctx, {
                     type: 'line',
