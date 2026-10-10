@@ -216,36 +216,36 @@
         <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
         
       <div class="buttons" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-            <!-- Role Selector Dropdown -->
-            <select id="roleSelector" onchange="updateResumeLink()" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; outline: none; transition: border-color 0.2s;">
-                <option value="developer">Role: Senior Game Developer</option>
-                <option value="systems">Role: Systems & Gameplay Engineer</option>
-                <option value="design">Role: Technical Game Designer</option>
-            </select>
+                <!-- Role Selector Dropdown -->
+                <select id="roleSelector" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; outline: none;">
+                    <option value="developer">Role: Senior Game Developer</option>
+                    <option value="systems">Role: Systems & Gameplay Engineer</option>
+                    <option value="design">Role: Technical Game Designer</option>
+                </select>
 
-            <!-- Dynamic Download Button -->
-            <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 View Resume</a>
-            
-            <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
-            <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
-        </div>
+                <!-- Dynamic Download Button -->
+                <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn" onclick="downloadResume(event)">📥 Download Resume</a>
+                
+                <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+                <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+            </div>
 
-        <!-- JavaScript to handle dynamic link switching -->
-        <script>
-            function updateResumeLink() {
-                const selector = document.getElementById('roleSelector');
-                const btn = document.getElementById('resumeBtn');
-                const role = selector.value;
+            <!-- JavaScript to trigger dynamic download or view based on selection -->
+            <script>
+                function downloadResume(event) {
+                    const role = document.getElementById('roleSelector').value;
+                    let filename = 'resume-developer.html';
 
-                if (role === 'developer') {
-                    btn.href = 'resume-developer.html';
-                } else if (role === 'systems') {
-                    btn.href = 'resume-systems.html';
-                } else if (role === 'design') {
-                    btn.href = 'resume-design.html';
+                    if (role === 'systems') {
+                        filename = 'resume-systems.html';
+                    } else if (role === 'design') {
+                        filename = 'resume-design.html';
+                    }
+
+                    // Updates the link destination dynamically on click
+                    document.getElementById('resumeBtn').href = filename;
                 }
-            }
-        </script>
+            </script>
 
         <div class="tech-stack">
            <div class="tech-stack">
