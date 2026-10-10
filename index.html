@@ -217,57 +217,29 @@
         
      <!-- Hero Buttons Section -->
 <!-- Hero Buttons Section -->
-<div class="buttons" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-    <!-- Role Selector Dropdown -->
-    <select id="roleSelector" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; outline: none;">
-        <option value="developer">Role: Senior Game Developer</option>
-        <option value="systems">Role: Systems & Gameplay Engineer</option>
-        <option value="design">Role: Technical Game Designer</option>
-    </select>
+<!-- Hero Buttons -->
+            <div class="buttons">
+                <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 Download Resume</a>
+                <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+                <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+            </div>
 
-    <!-- Automatic Download Button -->
-    <button onclick="downloadCV()" class="btn" style="cursor: pointer; border: none;">📥 Download CV</button>
-    
-    <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
-    <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
-</div>
+            <!-- JavaScript to Automatically Detect Role from URL -->
+            <script>
+                window.addEventListener('DOMContentLoaded', () => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const role = urlParams.get('role') || 'developer'; // Defaults to developer if no role is in the URL
+                    const resumeBtn = document.getElementById('resumeBtn');
 
-<!-- JavaScript to Automatically Trigger the Download -->
-<script>
-    function downloadCV() {
-        const role = document.getElementById('roleSelector').value;
-        
-        // Define the CV text content or HTML structure based on the portfolio data/role chosen
-        let cvContent = "";
-        let filename = "Abraham_Carbajal_Senior_Game_Developer.html";
-
-        if (role === 'developer') {
-            filename = "Abraham_Carbajal_Senior_Game_Developer.html";
-            cvContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Senior Game Developer CV</title></head><body><h1>Abraham Carbajal García</h1><h2>Senior Game Developer</h2><p>Senior Game Developer with 7+ years of commercial production experience bridging robust C#/C++ architecture with expert-level game design.</p></body></html>`;
-        } else if (role === 'systems') {
-            filename = "Abraham_Carbajal_Systems_Engineer.html";
-            cvContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Systems Engineer CV</title></head><body><h1>Abraham Carbajal García</h1><h2>Game Systems & Gameplay Engineer</h2><p>Specialized in clean modular architectures (SOLID), custom Editor tooling, and runtime performance optimization.</p></body></html>`;
-        } else if (role === 'design') {
-            filename = "Abraham_Carbajal_Technical_Game_Designer.html";
-            cvContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Technical Game Designer CV</title></head><body><h1>Abraham Carbajal García</h1><h2>Technical Game Designer</h2><p>Specialized in combat balancing, progression math, economy loops, and data-driven Python/JSON pipelines.</p></body></html>`;
-        }
-
-        // Create an invisible Blob and trigger automatic browser download
-        const blob = new Blob([cvContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        
-        // Clean up object URL
-        setTimeout(() => {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }, 0);
-    }
-</script>
+                    if (role === 'systems') {
+                        resumeBtn.href = 'resume-systems.html';
+                    } else if (role === 'design') {
+                        resumeBtn.href = 'resume-design.html';
+                    } else {
+                        resumeBtn.href = 'resume-developer.html';
+                    }
+                });
+            </script>
 
         <div class="tech-stack">
            <div class="tech-stack">
