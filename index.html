@@ -210,37 +210,46 @@
         <a href="#ue5">Unreal Engine 5</a>
     </nav>
 
-    <header id="about">
-        <h1>Abraham Carbajal García</h1>
-        <h2>Senior Engine & Systems Programmer</h2>
-        <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
-        
-     <!-- Hero Buttons Section -->
-<!-- Hero Buttons Section -->
-<!-- Hero Buttons -->
-            <div class="buttons">
-                <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 Download Resume</a>
-                <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
-                <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
-            </div>
+    <!-- Header / Hero Section -->
+            <header id="about">
+                <h1 id="portfolioTitle">Abraham Carbajal García</h1>
+                <div class="subtitle" id="portfolioSubtitle">Senior Game Developer</div>
+                <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
+                
+                <!-- Hero Buttons -->
+                <div class="buttons">
+                    <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 Download Resume</a>
+                    <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+                    <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+                </div>
+            </header>
 
-            <!-- JavaScript to Automatically Detect Role from URL -->
+            <!-- JavaScript to Automatically Detect Role, Update Title, Subtitle, and Button -->
             <script>
                 window.addEventListener('DOMContentLoaded', () => {
                     const urlParams = new URLSearchParams(window.location.search);
                     const role = urlParams.get('role') || 'developer'; // Defaults to developer if no role is in the URL
+                    
                     const resumeBtn = document.getElementById('resumeBtn');
+                    const subtitle = document.getElementById('portfolioSubtitle');
+                    const pageTitle = document.querySelector('title');
 
                     if (role === 'systems') {
                         resumeBtn.href = 'resume-systems.html';
+                        subtitle.textContent = 'Game Systems & Gameplay Engineer';
+                        pageTitle.textContent = 'Abraham Carbajal García | Systems & Gameplay Engineer';
                     } else if (role === 'design') {
                         resumeBtn.href = 'resume-design.html';
+                        subtitle.textContent = 'Technical Game Designer';
+                        pageTitle.textContent = 'Abraham Carbajal García | Technical Game Designer';
                     } else {
                         resumeBtn.href = 'resume-developer.html';
+                        subtitle.textContent = 'Senior Game Developer';
+                        pageTitle.textContent = 'Abraham Carbajal García | Senior Game Developer';
                     }
                 });
             </script>
-
+    
         <div class="tech-stack">
            <div class="tech-stack">
             <div class="tech-col">
