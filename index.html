@@ -26,7 +26,6 @@
             --border: #30363d;
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'Fira Code', monospace;
-            /* Added for the graph matching */
             --graph-accent: #8b5cf6; 
         }
 
@@ -117,6 +116,7 @@
             border-radius: 8px;
             padding: 25px;
             text-align: left;
+            margin-top: 40px;
         }
 
         .tech-col h3 { font-size: 1rem; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
@@ -167,7 +167,6 @@
         .problem-solution strong { color: #ffffff; }
         .case-study ul { margin-left: 20px; margin-bottom: 20px; }
         
-        /* Media Placeholders */
         .media-container {
             width: 100%;
             background: #000;
@@ -189,7 +188,6 @@
             .problem-solution { grid-template-columns: 1fr; }
         }
 
-        /* NEW COMBAT SHOWCASE SPECIFIC STYLES */
         .showcase-block {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -211,47 +209,20 @@
     </nav>
 
     <!-- Header / Hero Section -->
-            <header id="about">
-                <h1 id="portfolioTitle">Abraham Carbajal García</h1>
-                <div class="subtitle" id="portfolioSubtitle">Senior Game Developer</div>
-                <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
-                
-                <!-- Hero Buttons -->
-                <div class="buttons">
-                    <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 Download Resume</a>
-                    <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
-                    <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
-                </div>
-            </header>
+    <header id="about">
+        <h1 id="portfolioTitle">Abraham Carbajal García</h1>
+        <h2 id="portfolioSubtitle">Senior Game Developer</h2>
+        <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
+        
+        <!-- Hero Buttons -->
+        <div class="buttons">
+            <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 Download Resume</a>
+            <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+            <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+        </div>
 
-            <!-- JavaScript to Automatically Detect Role, Update Title, Subtitle, and Button -->
-            <script>
-                window.addEventListener('DOMContentLoaded', () => {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const role = urlParams.get('role') || 'developer'; // Defaults to developer if no role is in the URL
-                    
-                    const resumeBtn = document.getElementById('resumeBtn');
-                    const subtitle = document.getElementById('portfolioSubtitle');
-                    const pageTitle = document.querySelector('title');
-
-                    if (role === 'systems') {
-                        resumeBtn.href = 'resume-systems.html';
-                        subtitle.textContent = 'Game Systems & Gameplay Engineer';
-                        pageTitle.textContent = 'Abraham Carbajal García | Systems & Gameplay Engineer';
-                    } else if (role === 'design') {
-                        resumeBtn.href = 'resume-design.html';
-                        subtitle.textContent = 'Technical Game Designer';
-                        pageTitle.textContent = 'Abraham Carbajal García | Technical Game Designer';
-                    } else {
-                        resumeBtn.href = 'resume-developer.html';
-                        subtitle.textContent = 'Senior Game Developer';
-                        pageTitle.textContent = 'Abraham Carbajal García | Senior Game Developer';
-                    }
-                });
-            </script>
-    
+        <!-- Tech Stack Grid inside Header Container -->
         <div class="tech-stack">
-           <div class="tech-stack">
             <div class="tech-col">
                 <h3>Core Languages</h3>
                 <ul>
@@ -283,8 +254,6 @@
                     <li>Wwise Audio</li>
                 </ul>
             </div>
-            
-            <!-- NEW SECTION FILLED IN NEXT TO PIPELINES -->
             <div class="tech-col">
                 <h3>Game Design</h3>
                 <ul>
@@ -295,6 +264,32 @@
             </div>
         </div>
     </header>
+
+    <!-- JavaScript to Automatically Detect Role, Update Title, Subtitle, and Button -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role') || 'developer';
+            
+            const resumeBtn = document.getElementById('resumeBtn');
+            const subtitle = document.getElementById('portfolioSubtitle');
+            const pageTitle = document.querySelector('title');
+
+            if (role === 'systems') {
+                resumeBtn.href = 'resume-systems.html';
+                subtitle.textContent = 'Game Systems & Gameplay Engineer';
+                pageTitle.textContent = 'Abraham Carbajal García | Systems & Gameplay Engineer';
+            } else if (role === 'design') {
+                resumeBtn.href = 'resume-design.html';
+                subtitle.textContent = 'Technical Game Designer';
+                pageTitle.textContent = 'Abraham Carbajal García | Technical Game Designer';
+            } else {
+                resumeBtn.href = 'resume-developer.html';
+                subtitle.textContent = 'Senior Game Developer';
+                pageTitle.textContent = 'Abraham Carbajal García | Senior Game Developer';
+            }
+        });
+    </script>
 
     <main class="container">
 
@@ -345,7 +340,7 @@
 
         </div>
 
-        <!-- NEW COMBAT BALANCING INTERACTIVE SHOWCASE (INSERTED HERE) -->
+        <!-- Combat Balancing Interactive Showcase -->
         <div class="showcase-block">
             <h3 style="color: #f9fafb; margin-bottom: 6px; font-size: 1.35rem;">⚔️ Data-Driven Progression & Combat Balancing</h3>
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">妖百景 (One Hundred Ghost Scenes) — Technical Game Design</p>
@@ -360,7 +355,7 @@
                 <li><strong style="color: #ffffff;">Runtime Integration:</strong> Ingested generated JSON directly into Unity's architecture, allowing instant runtime updates to leveling curves and core combat mechanics.</li>
             </ul>
 
-            <!-- INTERACTIVE GRAPH (CHART.JS) -->
+            <!-- Interactive Graph (Chart.js) -->
             <div style="padding: 20px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 6px;">
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px; text-align: center; font-weight: 600;">Interactive Progression Simulation: Accumulated EXP Curve</p>
                 <div style="position: relative; height: 300px; width: 100%;">
@@ -368,7 +363,6 @@
                 </div>
             </div>
         </div>
-        <!-- END OF NEW SHOWCASE -->
 
         <!-- Project 1: Console Architecture -->
         <h2 class="section-title" id="console">Platform Abstraction & Save-Data Integrity</h2>
@@ -385,11 +379,9 @@
                 <p><strong>The Result:</strong> Achieved rock-solid save-data integrity against mid-write power and sleep events. Delivered a single save pipeline serving both SKUs without duplicating game logic, shipping successfully against Nintendo SDK v18.3.2.</p>
             </div>
 
-            <!-- Native Syntax Highlighting for C# -->
             <div style="margin-bottom: 25px;">
 <pre><code class="language-csharp">// The Critical Section (NintendoManager.cs)
 #if UNITY_SWITCH
-    // OS Exit Guard: Prevents console sleep or quit during transaction
     UnityEngine.Switch.Notification.EnterExitRequestHandlingSection();
 #endif
 
@@ -405,30 +397,12 @@
 
     nn.fs.File.Close(fileHandle);
     
-    // Commit closes the volume transaction as a single unit
     result = nn.fs.FileSystem.Commit(mountName);
     result.abortUnlessSuccess();
 
 #if UNITY_SWITCH
     UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 #endif</code></pre>
-            </div>
-
-            <div>
-<pre><code class="language-csharp">// One Call Site, Two Backends (SSExecuteIfFileExists.cs)
-public void ExecuteIfDirectFileExists()
-{
-#if !UNITY_SWITCH
-    // Standard PC Branch
-    if (File.Exists(Application.persistentDataPath + sSDynamicLoadPaths.GetDirectPath()))
-        executeWhenFileExists?.Invoke();
-    else
-        executeWhenFileNotExists?.Invoke();
-#else
-    // Nintendo Switch Native Delegation
-    ifFileExistNintendo?.Invoke(sSDynamicLoadPaths.GetDirectPath());
-#endif
-}</code></pre>
             </div>
         </div>
 
@@ -445,7 +419,6 @@ public void ExecuteIfDirectFileExists()
                 <p><strong>The Result:</strong> Delivered a modular architecture where game designers could seamlessly add hundreds of new enemies, skills, and items without requiring engineering intervention or breaking existing data references.</p>
             </div>
             
-            <!-- Link to Architecture HTML Document -->
             <a href="ayakashi-architecture.html" target="_blank" class="btn btn-outline" style="font-size: 0.9rem; margin-top: 10px; display: inline-block;">📄 View Architecture Document</a>
         </div>
 
@@ -457,7 +430,6 @@ public void ExecuteIfDirectFileExists()
             <span class="subtitle">Unreal Engine 5 | Nanite, Lumen, Blueprints</span>
             
             <div class="media-container" style="aspect-ratio: 16/9; margin-bottom: 25px;">
-                <!-- YouTube Embed with your actual video ID -->
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FkKWbpWVZDA" title="UE5 ArchViz Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
@@ -466,17 +438,6 @@ public void ExecuteIfDirectFileExists()
                 <p><strong>The Solution:</strong> Bypassed traditional LOD and optimization pipelines entirely by integrating <strong>Nanite</strong> to handle raw, unoptimized high-poly geometry natively. Configured <strong>Lumen</strong> for real-time global illumination to maximize realism, and engineered the core interactive mechanics for user exploration.</p>
                 <p><strong>The Result:</strong> Delivered a highly realistic, fully interactive architectural walkthrough driven entirely by next-gen rendering features, proving engine versatility and rapid prototyping capabilities.</p>
             </div>
-        </div>
-
-        <!-- Async Culture -->
-        <h2 class="section-title">Engineering Culture & Remote Workflow</h2>
-        <div class="case-study" style="border-color: var(--accent);">
-            <p style="margin-bottom: 15px;">Working across international, distributed teams requires more than writing code—it requires deep asynchronous communication discipline:</p>
-            <ul>
-                <li><strong>Documentation First:</strong> I write clear technical specifications and architecture diagrams before coding to ensure cross-timezone alignment.</li>
-                <li><strong>Version Control:</strong> Deep experience with Git workflows, branching strategies, and conducting rigorous, constructive pull request (PR) reviews.</li>
-                <li><strong>Automated Testing:</strong> I utilize the Unity Test Framework (UTF) and headless batchmode testing to catch regressions before they reach the main branch.</li>
-            </ul>
         </div>
 
     </main>
@@ -497,7 +458,6 @@ public void ExecuteIfDirectFileExists()
             if (canvasElement) {
                 const ctx = canvasElement.getContext('2d');
                 
-                // Actual data pulled directly from the "Level Up" spreadsheet for Levels 1-20
                 const levels = Array.from({length: 20}, (_, i) => `Lv ${i + 1}`);
                 const accumulatedExp = [0, 90, 250, 500, 880, 1400, 2080, 2930, 3980, 5280, 6830, 8630, 10760, 13160, 16160, 19460, 23260, 27460, 32430, 38010];
 
