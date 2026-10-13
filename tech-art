@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abraham Carbajal García | Technical Artist (Unity)</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #090d16;
+            --bg-card: #111827;
+            --bg-card-hover: #172033;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(6, 182, 212, 0.25);
+            --steam-color: #66c0f4;
+            --nintendo-color: #e60012;
+            --google-play-color: #3ddc84;
+            --youtube-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER HERO */
+        header {
+            padding: 70px 0 40px 0;
+            border-bottom: 1px solid var(--border-color);
+            background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.12) 0%, rgba(9, 13, 22, 0) 70%);
+            text-align: center;
+        }
+
+        .badge-pill {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .hero-location {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* GRID COMPETENCIAS */
+        .skills-section {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .skill-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .skill-box h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* CASOS DE ESTUDIO Y PROYECTOS */
+        .section-header {
+            margin: 50px 0 28px 0;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: border-color 0.25s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-glow);
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .project-meta h3 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* BOTONES DE TIENDAS */
+        .store-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .store-btn.steam {
+            border-color: rgba(102, 192, 244, 0.3);
+            color: var(--steam-color);
+            background: rgba(102, 192, 244, 0.08);
+        }
+        .store-btn.steam:hover {
+            background: rgba(102, 192, 244, 0.2);
+            border-color: var(--steam-color);
+        }
+
+        .store-btn.nintendo {
+            border-color: rgba(230, 0, 18, 0.3);
+            color: #ff4d5a;
+            background: rgba(230, 0, 18, 0.08);
+        }
+        .store-btn.nintendo:hover {
+            background: rgba(230, 0, 18, 0.2);
+            border-color: var(--nintendo-color);
+        }
+
+        .store-btn.playstore {
+            border-color: rgba(61, 220, 132, 0.3);
+            color: var(--google-play-color);
+            background: rgba(61, 220, 132, 0.08);
+        }
+        .store-btn.playstore:hover {
+            background: rgba(61, 220, 132, 0.2);
+            border-color: var(--google-play-color);
+        }
+
+        .store-btn.youtube {
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            background: rgba(239, 68, 68, 0.08);
+        }
+        .store-btn.youtube:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--youtube-color);
+        }
+
+        .project-role {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .project-card p {
+            font-size: 0.93rem;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+        }
+
+        .bullet-list {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .bullet-list li {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .bullet-list li strong {
+            color: #e2e8f0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.1rem; }
+            .project-card { padding: 22px; }
+            .project-meta { flex-direction: column; align-items: flex-start; }
+            .store-buttons { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header>
+        <div class="container">
+            <span class="badge-pill">Technical Artist • Unity Pipeline</span>
+            <h1>Abraham Carbajal García</h1>
+            <div class="hero-subtitle">Shaders (Shader Graph) • Herramientas de Editor (C#) • Optimización PC &amp; Steam</div>
+            <div class="hero-location">📍 Toluca, Estado de México (Disponible 100% Remoto / Híbrido)</div>
+            
+            <div class="hero-actions">
+                <a href="CV_Technical_Artist_1Pagina_Limpio.pdf" target="_blank" class="btn btn-primary">
+                    📥 Descargar CV (PDF)
+                </a>
+                <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">
+                    💼 LinkedIn
+                </a>
+                <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">
+                    💻 GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- PILARES TÉCNICOS -->
+        <section class="skills-section">
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>⚡ Shaders &amp; Rendering</h3>
+                    <p>Unity Shader Graph (transiciones cinemáticas, VFX, efectos 2D/3D), Universal Render Pipeline (URP), materiales PBR e iluminación dinámica.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>🛠️ Herramientas &amp; Editor</h3>
+                    <p>Scripting en C#, herramientas de editor personalizadas (Custom Windows &amp; Inspectors), ProBuilder (greyboxing) y control de versiones con Git.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>🚀 Optimización en PC</h3>
+                    <p>Reducción drástica de draw calls (batching), jerarquías LOD por distancia, perfilado con Unity Profiler, Frame Debugger y control de VRAM.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>🎨 Software Creativo</h3>
+                    <p>Adobe Photoshop avanzado (autoría del 100% de arte en Bacheton), ProBuilder y Adobe Premiere para captura técnica y edición de reels.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CASOS DE ESTUDIO Y JUEGOS PUBLICADOS -->
+        <div class="section-header">
+            <h2>Casos de Estudio &amp; Títulos Comerciales</h2>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">Proyectos Publicados &amp; Pipeline</span>
+        </div>
+
+        <!-- 1. The 257th Element -->
+        <article class="project-card">
+            <div class="project-meta">
+                <h3>The 257th Element</h3>
+                <div class="store-buttons">
+                    <a href="https://store.steampowered.com/app/2648640/The_257th_Element/" target="_blank" class="store-btn steam">
+                        🔗 Steam Store
+                    </a>
+                    <a href="https://www.nintendo.com/store/products/the-257th-element-switch/" target="_blank" class="store-btn nintendo">
+                        🎮 Nintendo eShop
+                    </a>
+                </div>
+            </div>
+            <div class="project-role">Technical Artist &amp; Lead Systems Developer</div>
+            <div class="tags-container">
+                <span class="tag">Shader Graph</span>
+                <span class="tag">Transiciones Cinemáticas</span>
+                <span class="tag">Herramientas en C# (Editor UI)</span>
+                <span class="tag">Streaming Asíncrono</span>
+                <span class="tag">PC &amp; Consolas</span>
+            </div>
+            <p>
+                Título narrativo comercial en Steam y Nintendo Switch. Diseñé shaders dinámicos de pantalla en Shader Graph para transiciones cinemáticas y desarrollé ventanas personalizadas en Unity Editor para automatizar la importación y validación de assets.
+            </p>
+            <ul class="bullet-list">
+                <li><strong>Transiciones Procedurales (Shader Graph):</strong> Shaders basados en máscaras de disolución y gradientes UV controlados por parámetros dinámicos, garantizando cambios de escena fluidos sin caídas de cuadros.</li>
+                <li><strong>Herramientas de Editor en C#:</strong> Ventanas personalizadas (Custom Editor UI) que automatizaron la verificación de subtítulos, sincronización de audio y validación de metadatos narrativos.</li>
+                <li><strong>Rendimiento &amp; Memoria:</strong> Streaming asíncrono para cumplir con las normativas estrictas de memoria de Nintendo Lotcheck.</li>
+            </ul>
+
+            <!-- GALERÍA DE IMÁGENES DESDE LA CARPETA IMG -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 22px;">
+                
+                <!-- Shader 1 -->
+                <div style="background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="img/Shader1.png" target="_blank" style="display: block; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; position: relative;">
+                        <img src="img/Shader1.png" alt="Shader Graph - Transición" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+                        <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); color: #06b6d4; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">🔍 Ver en HD</span>
+                    </a>
+                    <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a855f7; font-weight: 700;">SHADER GRAPH</span>
+                        <p style="font-size: 0.82rem; color: #94a3b8; margin: 2px 0 0 0;">Lógica de transición y disolución procedural.</p>
+                    </div>
+                </div>
+
+                <!-- Shader 2 -->
+                <div style="background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="img/Shader2.png" target="_blank" style="display: block; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; position: relative;">
+                        <img src="img/Shader2.png" alt="Shader Graph - Parámetros" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+                        <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); color: #06b6d4; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">🔍 Ver en HD</span>
+                    </a>
+                    <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a855f7; font-weight: 700;">SHADER PARAMETERS</span>
+                        <p style="font-size: 0.82rem; color: #94a3b8; margin: 2px 0 0 0;">Mapeo UV y control de bordes de disolución y canal alfa.</p>
+                    </div>
+                </div>
+
+                <!-- Custom Tool 1 -->
+                <div style="background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+                    <a href="img/CustomTool1.png" target="_blank" style="display: block; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; position: relative;">
+                        <img src="img/CustomTool1.png" alt="Herramienta personalizada de Unity Editor" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+                        <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); color: #06b6d4; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">🔍 Ver en HD</span>
+                    </a>
+                    <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #3b82f6; font-weight: 700;">CUSTOM EDITOR TOOL (C#)</span>
+                        <p style="font-size: 0.82rem; color: #94a3b8; margin: 2px 0 0 0;">Ventana personalizada para validación e importación de assets.</p>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+
+        <!-- 2. Fate of Windshift -->
+        <article class="project-card">
+            <div class="project-meta">
+                <h3>Fate of Windshift</h3>
+                <div class="store-buttons">
+                    <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank" class="store-btn steam">
+                        🔗 Steam Store
+                    </a>
+                    <a href="https://store.steampowered.com/app/1292200/Sound_of_Windshift_sound_track_vol001/" target="_blank" class="store-btn steam">
+                        🎵 Steam OST
+                    </a>
+                </div>
+            </div>
+            <div class="project-role">Technical Artist &amp; Senior Optimization Engineer</div>
+            <div class="tags-container">
+                <span class="tag">Reducción de Draw Calls</span>
+                <span class="tag">Mesh Combining Tool</span>
+                <span class="tag">ProBuilder</span>
+                <span class="tag">Unity Profiler</span>
+                <span class="tag">PC 60 FPS</span>
+            </div>
+            <p>
+                RPG de acción 3D para PC en Steam. Lideré la optimización gráfica y la preparación de entornos para sostener 60 FPS estables en PC.
+            </p>
+            <ul class="bullet-list">
+                <li><strong>Herramienta de Combinación de Mallas (C#):</strong> Creación de una herramienta en Unity Editor para combinar mallas estáticas y optimizar submateriales, reduciendo las llamadas de dibujo de ~4,000 a menos de 1,000 batches.</li>
+                <li><strong>Greyboxing con ProBuilder:</strong> Modelado rápido y bloqueo de entornos 3D para validación de escalas, navegación y colisiones.</li>
+                <li><strong>Perfilado de Rendimiento:</strong> Uso intensivo de Unity Profiler y Frame Debugger para aislar cuellos de botella en CPU y GPU.</li>
+            </ul>
+        </article>
+
+        <!-- 3. Bacheton -->
+        <article class="project-card">
+            <div class="project-meta">
+                <h3>Bacheton</h3>
+                <div class="store-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton&pcampaignid=web_share" target="_blank" class="store-btn playstore">
+                        📱 Google Play Store
+                    </a>
+                </div>
+            </div>
+            <div class="project-role">Desarrollador Solo &amp; Artista Visual</div>
+            <div class="tags-container">
+                <span class="tag">Adobe Photoshop</span>
+                <span class="tag">100% Arte Visual</span>
+                <span class="tag">UI Design</span>
+                <span class="tag">Texture Packing</span>
+                <span class="tag">Optimización 2D</span>
+            </div>
+            <p>
+                Videojuego para Android donde asumí la autoría del 100% del contenido visual, demostrando solidez técnica y artística en el flujo de producción 2D.
+            </p>
+            <ul class="bullet-list">
+                <li><strong>Autoría Artística Integral:</strong> Diseño de personajes, obstáculos 2D, fondos y la interfaz de usuario completa (UI) creados íntegramente en Adobe Photoshop.</li>
+                <li><strong>Optimización de Texturas:</strong> Configuración y empaquetado en Sprite Atlases para minimizar llamadas de dibujo y reducir el consumo de memoria en dispositivos móviles.</li>
+            </ul>
+        </article>
+
+        <!-- 4. 妖百景 & CAPTAIN AYE AYE! -->
+        <article class="project-card">
+            <div class="project-meta">
+                <h3>妖百景 (One Hundred Ghost Scenes) &amp; CAPTAIN AYE AYE!</h3>
+                <div class="store-buttons">
+                    <a href="https://youtu.be/VImAzv9VNMA?si=mV-2LvBL3FvxuKtj" target="_blank" class="store-btn youtube">
+                        ▶️ Demo 妖百景
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=6cCDds0ozBc" target="_blank" class="store-btn youtube">
+                        ▶️ Trailer CAPTAIN AYE AYE!
+                    </a>
+                </div>
+            </div>
+            <div class="project-role">Technical Artist &amp; Core Systems</div>
+            <div class="tags-container">
+                <span class="tag">Unity URP 2D</span>
+                <span class="tag">2D Lights &amp; Normal Maps</span>
+                <span class="tag">Shader Graph</span>
+                <span class="tag">Jerarquías LOD</span>
+            </div>
+            <ul class="bullet-list">
+                <li><strong>妖百景 (One Hundred Ghost Scenes):</strong> Implementación de jerarquías de LOD dinámicas por distancia y optimización de shaders estilizados y materiales PBR mediante Unity Shader Graph.</li>
+                <li><strong>CAPTAIN AYE AYE!:</strong> Configuración completa del pipeline 2D en Universal Render Pipeline (URP) con iluminación dinámica 2D, mapas normales en sprites y shaders estilizados.</li>
+            </ul>
+        </article>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Abraham Carbajal García • Technical Artist (Unity)</p>
+            <p style="margin-top: 6px; color: #64748b;">Toluca, Estado de México • Disponible para esquema Remoto o Híbrido</p>
+        </div>
+    </footer>
+
+</body>
+</html>
