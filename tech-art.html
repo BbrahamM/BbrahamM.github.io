@@ -43,7 +43,6 @@
             padding: 0 24px;
         }
 
-        /* HEADER HERO */
         header {
             padding: 70px 0 40px 0;
             border-bottom: 1px solid var(--border-color);
@@ -132,7 +131,6 @@
             transform: translateY(-2px);
         }
 
-        /* GRID COMPETENCIAS */
         .skills-section {
             padding: 40px 0;
             border-bottom: 1px solid var(--border-color);
@@ -167,7 +165,6 @@
             line-height: 1.5;
         }
 
-        /* CASOS DE ESTUDIO Y PROYECTOS */
         .section-header {
             margin: 50px 0 28px 0;
             display: flex;
@@ -209,7 +206,6 @@
             color: #ffffff;
         }
 
-        /* BOTONES DE TIENDAS */
         .store-buttons {
             display: flex;
             gap: 8px;
@@ -321,6 +317,84 @@
             color: #e2e8f0;
         }
 
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .media-card {
+            background: #0b0f19;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.2s ease;
+        }
+
+        .media-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+        }
+
+        .media-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hd-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.85);
+            color: #06b6d4;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .media-card:hover .hd-badge {
+            background: rgba(6, 182, 212, 0.9);
+            color: #000;
+        }
+
+        .media-caption {
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .media-caption .tag-lbl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .media-caption p {
+            font-size: 0.82rem !important;
+            color: #94a3b8 !important;
+            margin: 0 !important;
+        }
+
         footer {
             border-top: 1px solid var(--border-color);
             padding: 40px 0;
@@ -340,7 +414,6 @@
 </head>
 <body>
 
-    <!-- CABECERA -->
     <header>
         <div class="container">
             <span class="badge-pill">Technical Artist • Unity Pipeline</span>
@@ -364,7 +437,6 @@
 
     <main class="container">
 
-        <!-- PILARES TÉCNICOS -->
         <section class="skills-section">
             <div class="skills-grid">
                 <div class="skill-box">
@@ -386,7 +458,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE CASOS DE ESTUDIO Y JUEGOS PUBLICADOS -->
         <div class="section-header">
             <h2>Casos de Estudio &amp; Títulos Comerciales</h2>
             <span style="color: var(--text-muted); font-size: 0.85rem;">Proyectos Publicados &amp; Pipeline</span>
@@ -422,42 +493,59 @@
                 <li><strong>Rendimiento &amp; Memoria:</strong> Streaming asíncrono para cumplir con las normativas estrictas de memoria de Nintendo Lotcheck.</li>
             </ul>
 
-            <!-- GALERÍA DE IMÁGENES DESDE LA CARPETA IMG -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 22px;">
+            <!-- Galería de medios vinculada a la carpeta img/ -->
+            <div class="media-grid">
                 
-                <!-- Shader 1 -->
-                <div style="background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
-                    <a href="img/Shader1.png" target="_blank" style="display: block; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; position: relative;">
-                        <img src="img/Shader1.png" alt="Shader Graph - Transición" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
-                        <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); color: #06b6d4; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">🔍 Ver en HD</span>
-                    </a>
-                    <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a855f7; font-weight: 700;">SHADER GRAPH</span>
-                        <p style="font-size: 0.82rem; color: #94a3b8; margin: 2px 0 0 0;">Lógica de transición y disolución procedural.</p>
+                <!-- GIF en tiempo real -->
+                <div class="media-card">
+                    <div class="media-box">
+                        <img src="img/Transitions-ezgif.gif" alt="Transición en tiempo real Shader Graph" loading="lazy">
+                    </div>
+                    <div class="media-caption">
+                        <span class="tag-lbl" style="color: #06b6d4;">EN TIEMPO REAL</span>
+                        <p>Transición procedural de pantalla ejecutándose en motor.</p>
                     </div>
                 </div>
 
-                <!-- Shader 2 -->
-                <div style="background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
-                    <a href="img/Shader2.png" target="_blank" style="display: block; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; position: relative;">
-                        <img src="img/Shader2.png" alt="Shader Graph - Parámetros" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
-                        <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); color: #06b6d4; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">🔍 Ver en HD</span>
+                <!-- Shader 1 (Grafo) -->
+                <div class="media-card">
+                    <a href="img/Shader1.png" target="_blank" style="text-decoration: none;">
+                        <div class="media-box">
+                            <img src="img/Shader1.png" alt="Shader Graph - Grafo de Nodos" loading="lazy">
+                            <span class="hd-badge">🔍 Ver en HD</span>
+                        </div>
                     </a>
-                    <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a855f7; font-weight: 700;">SHADER PARAMETERS</span>
-                        <p style="font-size: 0.82rem; color: #94a3b8; margin: 2px 0 0 0;">Mapeo UV y control de bordes de disolución y canal alfa.</p>
+                    <div class="media-caption">
+                        <span class="tag-lbl" style="color: #a855f7;">SHADER GRAPH</span>
+                        <p>Lógica de grafo de nodos: disolución procedural y mapeo UV.</p>
+                    </div>
+                </div>
+
+                <!-- Shader 2 (Parámetros) -->
+                <div class="media-card">
+                    <a href="img/Shader2.png" target="_blank" style="text-decoration: none;">
+                        <div class="media-box">
+                            <img src="img/Shader2.png" alt="Shader Graph - Parámetros" loading="lazy">
+                            <span class="hd-badge">🔍 Ver en HD</span>
+                        </div>
+                    </a>
+                    <div class="media-caption">
+                        <span class="tag-lbl" style="color: #a855f7;">SHADER PARAMETERS</span>
+                        <p>Mapeo UV y control de bordes de disolución y canal alfa.</p>
                     </div>
                 </div>
 
                 <!-- Custom Tool 1 -->
-                <div style="background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
-                    <a href="img/CustomTool1.png" target="_blank" style="display: block; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; position: relative;">
-                        <img src="img/CustomTool1.png" alt="Herramienta personalizada de Unity Editor" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
-                        <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); color: #06b6d4; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">🔍 Ver en HD</span>
+                <div class="media-card">
+                    <a href="img/CustomTool1.png" target="_blank" style="text-decoration: none;">
+                        <div class="media-box">
+                            <img src="img/CustomTool1.png" alt="Herramienta personalizada Unity Editor" loading="lazy">
+                            <span class="hd-badge">🔍 Ver en HD</span>
+                        </div>
                     </a>
-                    <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #3b82f6; font-weight: 700;">CUSTOM EDITOR TOOL (C#)</span>
-                        <p style="font-size: 0.82rem; color: #94a3b8; margin: 2px 0 0 0;">Ventana personalizada para validación e importación de assets.</p>
+                    <div class="media-caption">
+                        <span class="tag-lbl" style="color: #3b82f6;">CUSTOM EDITOR TOOL (C#)</span>
+                        <p>Ventana personalizada para validación e importación de assets.</p>
                     </div>
                 </div>
 
@@ -550,13 +638,7 @@
 
     </main>
 
-    <!-- PIE DE PÁGINA -->
     <footer>
         <div class="container">
             <p>© 2026 Abraham Carbajal García • Technical Artist (Unity)</p>
-            <p style="margin-top: 6px; color: #64748b;">Toluca, Estado de México • Disponible para esquema Remoto o Híbrido</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+            <p style="margin-top: 6px; color:
