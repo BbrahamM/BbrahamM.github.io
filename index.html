@@ -6,7 +6,6 @@
     <title>Abraham Carbajal García | Senior Unity Developer</title>
     <!-- Prism.js Dark Theme for C# Syntax Highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -40,7 +39,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(11, 15, 25, 0.9);
+            background: rgba(11, 15, 25, 0.92);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             padding: 14px 24px;
@@ -93,7 +92,7 @@
             margin-top: 8px;
         }
         .hero-bio {
-            max-width: 820px;
+            max-width: 840px;
             color: #cbd5e1;
             font-size: 1.02rem;
             margin-top: 18px;
@@ -278,7 +277,7 @@
         /* Visual Proof Media Grid */
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 16px;
             margin: 22px 0;
         }
@@ -287,6 +286,8 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         .media-card a {
             display: block;
@@ -306,6 +307,18 @@
         .media-card a:hover img {
             transform: scale(1.03);
         }
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.82);
+            color: #60a5fa;
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
         .media-caption {
             padding: 10px 14px;
             font-size: 0.82rem;
@@ -319,11 +332,12 @@
             display: block;
             margin-bottom: 2px;
         }
+        /* Code Blocks */
         .code-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 18px;
-            margin-top: 18px;
+            margin-top: 22px;
         }
         .code-label {
             font-family: var(--font-mono);
@@ -337,7 +351,9 @@
             border-radius: 8px;
             border: 1px solid #334155;
             margin: 0 !important;
-            font-size: 0.84rem !important;
+            font-size: 0.82rem !important;
+            max-height: 460px;
+            overflow-y: auto;
         }
         .video-container {
             width: 100%;
@@ -363,8 +379,8 @@
     <nav>
         <a href="#about">Overview</a>
         <a href="#releases">Shipped Titles</a>
-        <a href="#console">Console & Async C#</a>
-        <a href="#architecture">Combat & Data Systems</a>
+        <a href="#console">Custom Tools & Async C#</a>
+        <a href="#architecture">Combat & Data Architecture</a>
         <a href="#optimization">Draw Call Tooling</a>
         <a href="#ue5">UE5 & C++</a>
     </nav>
@@ -376,13 +392,14 @@
         <p class="location">📍 Toluca, Mexico (CST / UTC-6) &nbsp;|&nbsp; 📧 abrahamcarbajal7@gmail.com &nbsp;|&nbsp; 📞 +52 722 851 5016</p>
         
         <p class="hero-bio">
-            Senior Unity Developer with <strong>7+ years of commercial production experience</strong> architecting decoupled gameplay systems, custom Editor pipelines, and asynchronous memory workflows in C#. Proven track record shipping titles across <strong>Nintendo Switch</strong> (passing strict <strong>Nintendo Lotcheck</strong> certification on first submission), <strong>Steam (PC)</strong>, and <strong>Mobile</strong>.
+            Senior Unity Developer with <strong>7+ years of commercial production experience</strong> architecting decoupled gameplay systems, custom Editor tools, and asynchronous data pipelines in C#. Proven track record shipping titles across <strong>Nintendo Switch</strong> (passing strict <strong>Nintendo Lotcheck</strong> certification on first submission), <strong>Steam (PC)</strong>, and <strong>Mobile</strong>.
         </p>
 
         <div class="buttons">
-            <a href="https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=sharing" target="_blank" class="btn">📥 View / Download Resume (PDF)</a>
+            <a href="resume.html" target="_blank" class="btn">📄 View / Download Resume (PDF)</a>
             <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub Profile</a>
             <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
+            <a href="ayakashi-architecture.html" target="_blank" class="btn btn-outline">📐 Systems Architecture Doc</a>
         </div>
 
         <div class="tech-stack">
@@ -396,11 +413,11 @@
                 </ul>
             </div>
             <div class="tech-col">
-                <h3>Unity Systems</h3>
+                <h3>Unity Systems & Tooling</h3>
                 <ul>
-                    <li>Addressables Asset Streaming</li>
-                    <li>UniTask (Zero-Alloc Async/Await)</li>
-                    <li>Custom Editor Tooling (UIElements/IMGUI)</li>
+                    <li>Custom Editor Tooling (EditorWindow)</li>
+                    <li>Addressables & Async Scene Streaming</li>
+                    <li>UniTask (Async/Await)</li>
                     <li>ScriptableObject Data Schemas</li>
                 </ul>
             </div>
@@ -414,12 +431,12 @@
                 </ul>
             </div>
             <div class="tech-col">
-                <h3>Secondary Stack</h3>
+                <h3>Complementary Stack</h3>
                 <ul>
-                    <li>Python (Data & Pipeline Automation)</li>
+                    <li>Python (Data Pipeline Automation)</li>
                     <li>C++ & Unreal Engine 5 (Nanite/Lumen)</li>
-                    <li>Unity Test Framework (CLI / CI)</li>
                     <li>URP & Shader Graph</li>
+                    <li>Git / GitHub Workflows</li>
                 </ul>
             </div>
         </div>
@@ -434,7 +451,7 @@
                 <div>
                     <h4>The 257th Element</h4>
                     <span class="role">Senior Unity Systems Developer</span>
-                    <p>Shipped on Nintendo Switch & PC (Steam). Full EN/JP voice streaming, custom Editor tooling, and Lotcheck compliance.</p>
+                    <p>Shipped on Nintendo Switch & PC (Steam). Asynchronous scene streaming, custom Editor tooling, Wwise audio, and Lotcheck compliance.</p>
                 </div>
                 <div class="card-links">
                     <a href="https://www.nintendo.com/us/store/products/the-257th-element-switch/" target="_blank">🎮 Nintendo eShop ↗</a>
@@ -446,7 +463,7 @@
                 <div>
                     <h4>妖百景 (One Hundred Ghost Scenes)</h4>
                     <span class="role">Core Systems & Gameplay Programmer</span>
-                    <p>Nintendo Switch & PC. Modular turn-based combat FSM, Strategy Pattern skills, and Python-to-JSON balance pipeline.</p>
+                    <p>Nintendo Switch & PC. Modular turn-based combat FSM, Strategy Pattern skills, dynamic inventory pools, and Python-to-JSON pipeline.</p>
                 </div>
                 <div class="card-links">
                     <a href="https://youtu.be/VImAzv9VNMA" target="_blank">▶️ Gameplay Video ↗</a>
@@ -458,7 +475,7 @@
                 <div>
                     <h4>Fate of Windshift & Windshift</h4>
                     <span class="role">Gameplay & Optimization Programmer</span>
-                    <p>Shipped on PC (Steam). Custom C# mesh-combining Editor tool reducing scene draw calls by 75% (from ~4,000 to &lt;1,000).</p>
+                    <p>Shipped on PC (Steam). Custom C# mesh-combining Editor tool reducing scene draw calls by 75% (from ~4,000 to &lt;1,000 batches).</p>
                 </div>
                 <div class="card-links">
                     <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank">🔗 Fate of Windshift ↗</a>
@@ -468,21 +485,22 @@
 
             <div class="shipped-card">
                 <div>
-                    <h4>Bacheton</h4>
+                    <h4>Bacheton & Captain Aye Aye!</h4>
                     <span class="role">Independent Unity Developer</span>
-                    <p>Shipped on Android (Google Play). Procedural obstacle generation, object pooling, encrypted saves, and 2D URP pipelines.</p>
+                    <p>Shipped on Android (Google Play). Procedural obstacle generation, object pooling, persistent data serialization, and 2D URP pipelines.</p>
                 </div>
                 <div class="card-links">
                     <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton" target="_blank">📱 Google Play ↗</a>
+                    <a href="https://www.youtube.com/watch?v=6cCDds0ozBc" target="_blank">▶️ URP 2D Demo ↗</a>
                 </div>
             </div>
         </div>
 
         <!-- CASE STUDY 1: THE 257TH ELEMENT -->
-        <h2 class="section-title" id="console">1. Console Compliance, Async Streaming & Custom Editor Tools</h2>
+        <h2 class="section-title" id="console">1. Custom Unity Editor Tooling, Shaders & Async Scene Streaming</h2>
         <div class="case-study">
             <h3>The 257th Element</h3>
-            <span class="subtitle">Shipped on Nintendo Switch & Steam | C#, Addressables, UniTask, Nintendo Switch SDK (nn.fs), Wwise, Shader Graph</span>
+            <span class="subtitle">Shipped on Nintendo Switch & Steam | C#, Custom EditorWindow, SceneManager Async, Nintendo Switch SDK, Wwise, Shader Graph</span>
 
             <div class="metrics-bar">
                 <div class="metric-box">
@@ -504,16 +522,80 @@
             </div>
 
             <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Shipping a dual-language (English/Japanese) fully voiced narrative title on Nintendo Switch under strict memory budgets and certification rules. Synchronous asset loading caused main-thread hitches, and standard file I/O does not comply with Nintendo Switch <code>nn.fs</code> atomic save-data transaction rules during OS sleep or game-exit events.</p>
-                <p><strong>The Solution:</strong> Architected a decoupled C# runtime separated via Assembly Definitions (<code>.asmdef</code>). Engineered deterministic chapter streaming using <code>Addressables</code> and <code>UniTask</code> with explicit handle release on episode transitions. Built a custom Unity Editor validation window to automate CSV/Excel dialogue parsing and Wwise audio GUID binding, alongside a transactional Nintendo Switch save system guarded against mid-write interruptions.</p>
+                <p><strong>The Challenge:</strong> Shipping a dual-language (English/Japanese) fully voiced narrative title on Nintendo Switch under strict memory budgets and certification rules. Synchronous scene and asset loading caused main-thread hitches, and manual dialogue/audio binding across thousands of lines created production bottlenecks.</p>
+                <p><strong>The Solution:</strong> Architected a decoupled C# runtime separated via Assembly Definitions (<code>.asmdef</code>). Built custom Unity Editor windows (<code>CustomTool1.png</code>) to automate spreadsheet dialogue ingestion and Wwise audio validation, procedural Shader Graph screen transitions (<code>Shader1.png</code>, <code>Shader2.png</code>), and an asynchronous background scene-loading pipeline that prevents main-thread stalls.</p>
+            </div>
+
+            <!-- Visual Proof: Custom Editor Tools & Shader Graph Screenshots -->
+            <div class="media-grid">
+                <div class="media-card">
+                    <a href="CustomTool1.png" target="_blank">
+                        <img src="CustomTool1.png" alt="Custom Unity Editor Tooling Window" loading="lazy">
+                        <span class="zoom-badge">🔍 Click for Full HD</span>
+                    </a>
+                    <div class="media-caption">
+                        <strong>CUSTOM UNITY EDITOR TOOL (C#)</strong>
+                        Custom EditorWindow built to automate narrative asset validation, subtitle parsing, and audio binding.
+                    </div>
+                </div>
+                <div class="media-card">
+                    <a href="Shader1.png" target="_blank">
+                        <img src="Shader1.png" alt="Unity Shader Graph Transition Architecture" loading="lazy">
+                        <span class="zoom-badge">🔍 Click for Full HD</span>
+                    </a>
+                    <div class="media-caption">
+                        <strong>PROCEDURAL TRANSITION SHADER GRAPH</strong>
+                        Node architecture for dynamic screen dissolves and UV-mapped narrative transitions.
+                    </div>
+                </div>
+                <div class="media-card">
+                    <a href="Shader2.png" target="_blank">
+                        <img src="Shader2.png" alt="Shader Graph Exposed Parameters" loading="lazy">
+                        <span class="zoom-badge">🔍 Click for Full HD</span>
+                    </a>
+                    <div class="media-caption">
+                        <strong>SHADER PARAMETERS & UV CONTROL</strong>
+                        Exposed alpha-cutoff and gradient parameters driven dynamically via C# runtime events.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Proof 1: Extracted Scene Streaming Code -->
+            <div class="code-grid">
+                <div>
+                    <div class="code-label">
+                        <span>Asynchronous Additive Scene Streaming & Event Callback</span>
+                        <span>C# / The 257th Element</span>
+                    </div>
+<pre><code class="language-csharp">// Non-blocking additive background scene loading with event notification to prevent main-thread stalls on Switch
+private IEnumerator LoadSceneBackground(string sceneToLoad, int sceneIndex = 0)
+{
+    int currentNumberOfScenes = SceneManager.sceneCount;
+    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+
+    while (!asyncLoad.isDone || SceneManager.sceneCount == currentNumberOfScenes)
+    {
+        yield return null;
+    }
+
+    backgroundsLoaded[sceneIndex] = SceneManager.GetSceneByName(sceneToLoad);
+    OnSceneLoaded(EventArgs.Empty);
+}
+
+protected virtual void OnSceneLoaded(EventArgs e)
+{
+    EventHandler handler = loadSceneHandler;
+    handler?.Invoke(this, e);
+}</code></pre>
+                </div>
             </div>
         </div>
 
-        <!-- CASE STUDY 2: AYAKASHI (WITH NEW BATTLE LEVEL UP GRAPH) -->
-        <h2 class="section-title" id="architecture">2. Modular Combat Architecture & Data-Driven Level Up Balancing</h2>
+        <!-- CASE STUDY 2: AYAKASHI (WITH YOUR REAL BtlSkill.cs SCRIPT) -->
+        <h2 class="section-title" id="architecture">2. Modular Combat Architecture & Pluggable Skill Systems</h2>
         <div class="case-study">
             <h3>妖百景 (One Hundred Ghost Scenes)</h3>
-            <span class="subtitle">Nintendo Switch & PC | C#, SOLID (.asmdef), FSM, Strategy Pattern, ScriptableObjects, Python Automation, Chart.js</span>
+            <span class="subtitle">Nintendo Switch & PC | C#, SOLID (.asmdef), FSM, Strategy Pattern, ScriptableObjects, UnityEvents</span>
 
             <div class="metrics-bar">
                 <div class="metric-box">
@@ -531,32 +613,111 @@
             </div>
 
             <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Designing a scalable turn-based RPG combat and inventory architecture where designers could iterate on 50+ items, equipment pieces, and skill formulas without creating tight coupling between combat math, Cinemachine cameras, UI presenters, and particle VFX.</p>
-                <p><strong>The Solution:</strong> Isolated combat sequencing (<code>BtlTurnBaseManager</code>), pluggable skill calculations (<code>BtlASkillFormula</code> using the Strategy Pattern), and atomic item reservations (<code>BtlItemPool</code>) behind strict interface and event contracts. Built an automated Python serialization pipeline that converts external balancing spreadsheets directly into runtime Unity JSON schemas.</p>
+                <p><strong>The Challenge:</strong> Engineering a scalable turn-based RPG combat and inventory architecture where 50+ items, equipment pieces, and skill formulas could be integrated and iterated upon without creating tight coupling between combat math, Cinemachine cameras, UI presenters, and particle VFX.</p>
+                <p><strong>The Solution:</strong> Isolated turn sequencing (<code>BtlTurnBaseManager</code>), pluggable skill definitions (<code>BtlSkill</code> composing <code>BtlASkillFormula</code> via the Strategy Pattern and <code>UnityEvent</code> callbacks), and atomic item reservations (<code>BtlItemPool</code>). Automated external spreadsheet ingestion into runtime Unity JSON schemas using Python.</p>
             </div>
 
-            <!-- NEW BATTLE LEVEL UP GRAPH SECTION -->
-            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 24px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                    <div>
-                        <h4 style="color: #ffffff; font-size: 1.05rem; margin-bottom: 2px;">📊 RPG Stat Scaling & Progression Curve (Battle Level Up)</h4>
-                        <p style="font-size: 0.82rem; color: var(--text-muted);">Data-driven attribute progression curves managed via ScriptableObjects & Python balance JSONs.</p>
+            <!-- Code Proof 2: Your Real BtlSkill.cs Production Script -->
+            <div class="code-grid">
+                <div>
+                    <div class="code-label">
+                        <span>BtlSkill.cs — ScriptableObject Skill Definition, Strategy Formula Injection & AI Scoring</span>
+                        <span>C# / 妖百景 Production Code</span>
                     </div>
-                    <div>
-                        <select id="statSelector" onchange="updateChartDataset()" style="background: var(--bg-card); color: #ffffff; border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 0.82rem; font-family: var(--font-mono); cursor: pointer;">
-                            <option value="hp">HP Progression (Linear/Exp)</option>
-                            <option value="atk">Attack Power Curve</option>
-                            <option value="exp">XP Required per Level</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="width: 100%; height: 280px; position: relative;">
-                    <canvas id="battleLevelChart"></canvas>
+<pre><code class="language-csharp">using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+[CreateAssetMenu(fileName = "BtlSkill", menuName = "Scriptable Objects/Battle Manager/Skills/Skill")]
+public class BtlSkill : ScriptableObject
+{
+    [SerializeField] private SKName skillName;
+    [SerializeField] private SkillKind skillKind;
+    [SerializeField] private CharacterKind whatAttacks;
+    [SerializeField] private SkillEffect skillEffect;
+    [SerializeField] private List&lt;Use&gt; whereToUse;
+    [SerializeField] private float skillAttackPower = 0f;
+    [SerializeField] private float skillManaCost = 0f;
+    [SerializeField] private float skillOrderOfAction = 3f;
+    [SerializeField] private UnityEvent&lt;BtlMCharacterManager, BtlMCharacterManager&gt; applyDamage;
+
+    [HideInInspector] public BtlMCharacterManager characterManager;
+
+    [SerializeField] private string[] modifiers;
+    [SerializeField] private SkillDescription[] description;
+    [SerializeField] private GameObject effect;
+    [SerializeField] private int targetNumber = 1;
+    [SerializeField] private bool targetAll = false;
+    [SerializeField] private bool alive = true;
+    [SerializeField] private bool stackable = false;
+    [SerializeField] private SkillExtraEffect statusEffectConfig = new();
+    [SerializeField] private BtlASkillFormula formula;
+
+    public string SKNAME =&gt; skillName.NAMES[(int)BattleManager._instance.BMLANGUAGE];
+    public string SKENNAME =&gt; skillName.NAMES[0];
+    public SkillKind SkillKind { get =&gt; skillKind; set =&gt; skillKind = value; }
+    public float SKPWR =&gt; skillAttackPower;
+    public float SKMPCOST =&gt; skillManaCost;
+
+    public void Apply(BtlMCharacterManager target)
+    {
+        applyDamage?.Invoke(BattleManager._instance.Attacker, target);
+    }
+
+    public float Test(BtlMCharacterManager target)
+    {
+        return formula.Test(BattleManager._instance.Attacker, target);
+    }
+
+    public string[] SKModifiers { get =&gt; modifiers; set =&gt; modifiers = value; }
+    public CharacterKind SKMWhatAttacks =&gt; whatAttacks;
+    public SkillDescription[] SKDescriptions =&gt; description;
+    public GameObject SKANIM =&gt; effect;
+    public int SKTargetNumber =&gt; targetNumber;
+    public bool SKTargetAll =&gt; targetAll;
+    public bool SKAlive =&gt; alive;
+    public SkillEffect SKEFFECT =&gt; skillEffect;
+    public SkillExtraEffect SKEXTRAEFFECT =&gt; statusEffectConfig;
+    public bool SKSTACKABLE =&gt; stackable;
+    public float SKORDEROFACTION =&gt; skillOrderOfAction;
+    public List&lt;Use&gt; SKWHERETOUSE =&gt; whereToUse;
+    public BtlASkillFormula FORMULA =&gt; formula;
+}
+
+[Serializable]
+public class SkillDescription
+{
+    public DescriptionType WhereToUse = DescriptionType.MAP;
+    public string Description = string.Empty;
+}
+
+public enum DescriptionType { MAP, BATTLE }
+public enum SkillKind { BASIC, MAGIC, SPECIAL, ITEM, ESCAPE }
+public enum SkillEffect { ATTACK, HEAL, BUFF, DEBUFF, CROWDCONTROL, DEFENSE }
+
+[Serializable]
+public class SkillExtraEffect
+{
+    public string effectKey = "normal";
+    public float baseScoreValue = 1f;
+    public bool stackable = false;
+    public float duplicatePenalty = 0.5f;
+    public float duration = 1f;
+    public float potency = 1f;
+    public string thinking = "none";
+}
+
+[Serializable]
+public class SKName
+{
+    public string[] NAMES;
+}</code></pre>
                 </div>
             </div>
 
-            <div class="buttons" style="margin-top: 20px;">
-                <a href="ayakashi-architecture.html" target="_blank" class="btn">📐 Open Full 3-Page Systems Architecture Diagrams (HTML) ↗</a>
+            <div class="buttons" style="margin-top: 22px;">
+                <a href="ayakashi-architecture.html" target="_blank" class="btn">📐 Open Full 3-Page Systems Architecture Diagrams (UML / HTML) ↗</a>
                 <a href="https://youtu.be/VImAzv9VNMA" target="_blank" class="btn btn-outline">▶️ Watch Combat Gameplay Showcase ↗</a>
             </div>
         </div>
@@ -608,79 +769,5 @@
     <!-- Prism.js for C# Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-
-    <!-- Chart.js Script for Battle Level Up Graph -->
-    <script>
-        const ctx = document.getElementById('battleLevelChart').getContext('2d');
-        
-        const chartData = {
-            labels: ['Lv.1', 'Lv.10', 'Lv.20', 'Lv.30', 'Lv.40', 'Lv.50', 'Lv.60', 'Lv.70', 'Lv.80', 'Lv.90', 'Lv.100'],
-            datasets: [{
-                label: 'HP Progression (Stat Curve)',
-                data: [120, 340, 780, 1450, 2400, 3650, 5200, 7100, 9400, 12200, 16000],
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.3
-            }]
-        };
-
-        const chartConfigs = {
-            hp: {
-                label: 'HP Progression (Stat Curve)',
-                data: [120, 340, 780, 1450, 2400, 3650, 5200, 7100, 9400, 12200, 16000],
-                color: '#3b82f6',
-                bg: 'rgba(59, 130, 246, 0.1)'
-            },
-            atk: {
-                label: 'Attack Power Curve (Strategy Multiplier)',
-                data: [25, 65, 140, 250, 400, 600, 850, 1150, 1500, 1950, 2500],
-                color: '#10b981',
-                bg: 'rgba(16, 185, 129, 0.1)'
-            },
-            exp: {
-                label: 'XP Required per Level (Exponential Scaling)',
-                data: [100, 450, 1200, 2800, 5500, 9800, 16000, 25000, 38000, 56000, 80000],
-                color: '#8b5cf6',
-                bg: 'rgba(139, 92, 246, 0.1)'
-            }
-        };
-
-        const battleChart = new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace" } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace" } }
-                    }
-                }
-            }
-        });
-
-        function updateChartDataset() {
-            const selectVal = document.getElementById('statSelector').value;
-            const cfg = chartConfigs[selectVal];
-            
-            battleChart.data.datasets[0].label = cfg.label;
-            battleChart.data.datasets[0].data = cfg.data;
-            battleChart.data.datasets[0].borderColor = cfg.color;
-            battleChart.data.datasets[0].backgroundColor = cfg.bg;
-            battleChart.update();
-        }
-    </script>
 </body>
 </html>
