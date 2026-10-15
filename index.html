@@ -277,7 +277,7 @@
         /* Visual Proof Media Grid */
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 16px;
             margin: 22px 0;
         }
@@ -396,7 +396,7 @@
         </p>
 
         <div class="buttons">
-            <a href="resume.html" target="_blank" class="btn">📄 View / Download Resume (PDF)</a>
+            <a href="https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=drive_link" target="_blank" class="btn">📥 Resume (PDF)</a>
             <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub Profile</a>
             <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
             <a href="ayakashi-architecture.html" target="_blank" class="btn btn-outline">📐 Systems Architecture Doc</a>
@@ -523,39 +523,49 @@
 
             <div class="problem-solution">
                 <p><strong>The Challenge:</strong> Shipping a dual-language (English/Japanese) fully voiced narrative title on Nintendo Switch under strict memory budgets and certification rules. Synchronous scene and asset loading caused main-thread hitches, and manual dialogue/audio binding across thousands of lines created production bottlenecks.</p>
-                <p><strong>The Solution:</strong> Architected a decoupled C# runtime separated via Assembly Definitions (<code>.asmdef</code>). Built custom Unity Editor windows (<code>CustomTool1.png</code>) to automate spreadsheet dialogue ingestion and Wwise audio validation, procedural Shader Graph screen transitions (<code>Shader1.png</code>, <code>Shader2.png</code>), and an asynchronous background scene-loading pipeline that prevents main-thread stalls.</p>
+                <p><strong>The Solution:</strong> Architected a decoupled C# runtime separated via Assembly Definitions (<code>.asmdef</code>). Built custom Unity Editor windows to automate spreadsheet dialogue ingestion and Wwise audio validation, procedural Shader Graph screen transitions, and an asynchronous background scene-loading pipeline that prevents main-thread stalls.</p>
             </div>
 
-            <!-- Visual Proof: Custom Editor Tools & Shader Graph Screenshots -->
+            <!-- Visual Proof: Pointing to img/ folder with automatic fallback -->
             <div class="media-grid">
                 <div class="media-card">
-                    <a href="CustomTool1.png" target="_blank">
-                        <img src="CustomTool1.png" alt="Custom Unity Editor Tooling Window" loading="lazy">
-                        <span class="zoom-badge">🔍 Click for Full HD</span>
+                    <a href="img/CustomTool1.png" target="_blank">
+                        <img src="img/CustomTool1.png" onerror="this.onerror=null; this.src='CustomTool1.png';" alt="Custom Unity Editor Tooling Window 1" loading="lazy">
+                        <span class="zoom-badge">🔍 Click for HD</span>
                     </a>
                     <div class="media-caption">
-                        <strong>CUSTOM UNITY EDITOR TOOL (C#)</strong>
+                        <strong>CUSTOM EDITOR TOOL 1 (C#)</strong>
                         Custom EditorWindow built to automate narrative asset validation, subtitle parsing, and audio binding.
                     </div>
                 </div>
                 <div class="media-card">
-                    <a href="Shader1.png" target="_blank">
-                        <img src="Shader1.png" alt="Unity Shader Graph Transition Architecture" loading="lazy">
-                        <span class="zoom-badge">🔍 Click for Full HD</span>
+                    <a href="img/CustomTool2.png" target="_blank">
+                        <img src="img/CustomTool2.png" onerror="this.onerror=null; this.src='CustomTool2.png';" alt="Custom Unity Editor Tooling Window 2" loading="lazy">
+                        <span class="zoom-badge">🔍 Click for HD</span>
                     </a>
                     <div class="media-caption">
-                        <strong>PROCEDURAL TRANSITION SHADER GRAPH</strong>
-                        Node architecture for dynamic screen dissolves and UV-mapped narrative transitions.
+                        <strong>CUSTOM EDITOR TOOL 2 (C#)</strong>
+                        Automated scene/chapter configuration and asset verification pipeline inside Unity Editor.
                     </div>
                 </div>
                 <div class="media-card">
-                    <a href="Shader2.png" target="_blank">
-                        <img src="Shader2.png" alt="Shader Graph Exposed Parameters" loading="lazy">
-                        <span class="zoom-badge">🔍 Click for Full HD</span>
+                    <a href="img/Transitions-ezgif.gif" target="_blank">
+                        <img src="img/Transitions-ezgif.gif" onerror="this.onerror=null; this.src='Transitions-ezgif.gif';" alt="Real-Time Shader Transition GIF" loading="lazy">
+                        <span class="zoom-badge">▶️ GIF in Action</span>
                     </a>
                     <div class="media-caption">
-                        <strong>SHADER PARAMETERS & UV CONTROL</strong>
-                        Exposed alpha-cutoff and gradient parameters driven dynamically via C# runtime events.
+                        <strong>REAL-TIME SHADER TRANSITION</strong>
+                        Procedural screen dissolve and transition shader executing at 60 FPS in engine.
+                    </div>
+                </div>
+                <div class="media-card">
+                    <a href="img/Shader1.png" target="_blank">
+                        <img src="img/Shader1.png" onerror="this.onerror=null; this.src='Shader1.png';" alt="Unity Shader Graph Transition Architecture" loading="lazy">
+                        <span class="zoom-badge">🔍 Click for HD</span>
+                    </a>
+                    <div class="media-caption">
+                        <strong>SHADER GRAPH ARCHITECTURE</strong>
+                        Node graph for procedural screen dissolves and UV-mapped narrative transitions.
                     </div>
                 </div>
             </div>
@@ -742,6 +752,10 @@ public class SKName
             <div class="problem-solution">
                 <p><strong>The Challenge:</strong> Dense 3D open-world environments suffered from severe CPU render-thread bottlenecks caused by thousands of unbatched static props and fragmented multi-material submeshes, pushing draw calls above 4,000 per frame.</p>
                 <p><strong>The Solution:</strong> Authored a custom C# Unity Editor utility using the <code>Mesh.CombineMeshes</code> API to spatially group static geometry, merge shared material submeshes, and preserve lightmap UVs and colliders non-destructively—slashing draw calls under 1,000 batches and locking a steady 60 FPS.</p>
+            </div>
+
+            <div class="buttons" style="margin-top: 14px;">
+                <a href="https://www.youtube.com/watch?v=qdan6jRXv_4" target="_blank" class="btn btn-outline">▶️ Watch Optimization Demo (Scene vs Game View) ↗</a>
             </div>
         </div>
 
