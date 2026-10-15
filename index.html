@@ -3,515 +3,684 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abraham Carbajal García | Senior Software Engineer</title>
-    
-    <!-- Google Fonts for a clean, modern aesthetic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Prism.js for native C# Syntax Highlighting -->
+    <title>Abraham Carbajal García | Senior Unity Developer</title>
+    <!-- Prism.js Dark Theme for C# Syntax Highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            /* GitHub Dark Mode inspired palette */
-            --bg-main: #0d1117;
-            --bg-card: #161b22;
-            --bg-nav: rgba(13, 17, 23, 0.95);
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --accent-hover: #1f6feb;
-            --border: #30363d;
-            --font-sans: 'Inter', sans-serif;
-            --font-mono: 'Fira Code', monospace;
-            --graph-accent: #8b5cf6; 
+            --bg-main: #0b0f19;
+            --bg-card: #111827;
+            --bg-card-alt: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --green: #10b981;
+            --border: #1f2937;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Consolas', monospace;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        html { scroll-behavior: smooth; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             font-family: var(--font-sans);
             line-height: 1.6;
         }
-
-        /* Navigation */
+        /* Sticky Top Navigation */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--bg-nav);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            padding: 15px 20px;
+            padding: 14px 24px;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
             flex-wrap: wrap;
+            gap: 24px;
         }
-
         nav a {
-            color: var(--text-main);
+            color: var(--text-muted);
             text-decoration: none;
-            font-weight: 600;
             font-size: 0.9rem;
+            font-weight: 600;
             transition: color 0.2s;
         }
-
-        nav a:hover { color: var(--accent); }
-
-        /* Hero Section */
+        nav a:hover {
+            color: #ffffff;
+        }
+        /* Hero Header */
         header {
-            padding: 120px 20px 60px;
-            max-width: 900px;
+            max-width: 1040px;
             margin: 0 auto;
-            text-align: center;
+            padding: 55px 24px 40px;
             border-bottom: 1px solid var(--border);
         }
-
-        h1 { font-size: 3rem; color: #ffffff; margin-bottom: 10px; }
-        h2 { font-size: 1.5rem; color: var(--text-muted); font-weight: 400; margin-bottom: 20px; }
-        
-        .location {
+        .eyebrow {
             font-family: var(--font-mono);
-            font-size: 0.9rem;
             color: var(--accent);
-            margin-bottom: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
-
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+        .role-subtitle {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 4px;
+        }
+        .location {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+        .hero-bio {
+            max-width: 820px;
+            color: #cbd5e1;
+            font-size: 1.02rem;
+            margin-top: 18px;
+        }
         .buttons {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
             flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
         }
-
         .btn {
-            background: #238636; /* GitHub Success Green */
-            color: white;
+            background: var(--accent);
+            color: #ffffff;
             padding: 10px 20px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: 0.2s;
+            font-size: 0.92rem;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        
-        .btn:hover { background: #2ea043; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-        .btn-outline:hover { background: var(--border); }
-
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #334155;
+            color: var(--text-main);
+        }
+        .btn-outline:hover {
+            background: #1e293b;
+            border-color: #475569;
+        }
         /* Tech Stack Grid */
         .tech-stack {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 36px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 25px;
-            text-align: left;
-            margin-top: 40px;
+            padding: 20px;
         }
-
-        .tech-col h3 { font-size: 1rem; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
-        .tech-col ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
-        .tech-col li { margin-bottom: 5px; }
-
-        /* Main Content */
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .section-title { font-size: 2rem; color: #ffffff; margin: 60px 0 30px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
-
+        .tech-col h3 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-family: var(--font-mono);
+        }
+        .tech-col ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        .tech-col li {
+            margin-bottom: 4px;
+        }
+        /* Main Container */
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 45px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
         /* Shipped Titles Grid */
         .shipped-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
         }
         .shipped-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-left: 4px solid var(--accent);
-            padding: 15px 20px;
-            border-radius: 6px;
+            padding: 18px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .shipped-card h4 { color: #ffffff; margin-bottom: 5px; font-size: 1.1rem; }
-        .shipped-card .role { color: var(--accent); font-weight: 600; font-size: 0.8rem; margin-bottom: 5px; display: block; }
-        .shipped-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0; }
-
+        .shipped-card h4 {
+            color: #ffffff;
+            font-size: 1.08rem;
+            margin-bottom: 4px;
+        }
+        .shipped-card .role {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .shipped-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .card-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .card-links a {
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #60a5fa;
+        }
+        .card-links a:hover {
+            text-decoration: underline;
+        }
         /* Case Studies */
         .case-study {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 40px;
+            border-radius: 10px;
+            padding: 28px;
+            margin-bottom: 32px;
         }
-
-        .case-study h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 5px; }
-        .case-study .subtitle { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; display: block; }
-        
+        .case-study h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        .case-study .subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.84rem;
+            color: var(--accent);
+            margin-bottom: 18px;
+            display: block;
+        }
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .metric-box {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .metric-val {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: var(--font-mono);
+        }
+        .metric-lbl {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
         .problem-solution {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 22px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
         }
-
-        .problem-solution strong { color: #ffffff; }
-        .case-study ul { margin-left: 20px; margin-bottom: 20px; }
-        
-        .media-container {
-            width: 100%;
-            background: #000;
+        .problem-solution strong {
+            color: #ffffff;
+        }
+        /* Visual Proof Media Grid */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 22px 0;
+        }
+        .media-card {
+            background: #090d16;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
         }
-
-        /* Code Block override */
+        .media-card a {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        .media-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.2s;
+        }
+        .media-card a:hover img {
+            transform: scale(1.03);
+        }
+        .media-caption {
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+        .media-caption strong {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .code-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-top: 18px;
+        }
+        .code-label {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: #93c5fd;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
         pre[class*="language-"] {
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            margin: 20px 0 0 0;
-        }
-
-        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 50px; }
-
-        @media (min-width: 768px) {
-            .problem-solution { grid-template-columns: 1fr; }
-        }
-
-        .showcase-block {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 30px;
             border-radius: 8px;
-            margin-bottom: 60px;
-            border-left: 4px solid var(--graph-accent);
+            border: 1px solid #334155;
+            margin: 0 !important;
+            font-size: 0.84rem !important;
+        }
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#about">About</a>
-        <a href="#releases">Commercial Releases</a>
-        <a href="#console">Console Compliance</a>
-        <a href="#architecture">Systems Architecture</a>
-        <a href="#ue5">Unreal Engine 5</a>
+        <a href="#about">Overview</a>
+        <a href="#releases">Shipped Titles</a>
+        <a href="#console">Console & Async C#</a>
+        <a href="#architecture">Combat & Data Systems</a>
+        <a href="#optimization">Draw Call Tooling</a>
+        <a href="#ue5">UE5 & C++</a>
     </nav>
 
-    <!-- Header / Hero Section -->
     <header id="about">
-        <h1 id="portfolioTitle">Abraham Carbajal García</h1>
-        <h2 id="portfolioSubtitle">Senior Game Developer</h2>
-        <p class="location">📍 Toluca, Mexico (CST / UTC-6) | 🌍 Open to Global Remote</p>
+        <div class="eyebrow">C# Systems Architecture • Custom Unity Tooling • Console Performance</div>
+        <h1>Abraham Carbajal García</h1>
+        <div class="role-subtitle">Senior Unity Developer</div>
+        <p class="location">📍 Toluca, Mexico (CST / UTC-6) &nbsp;|&nbsp; 📧 abrahamcarbajal7@gmail.com &nbsp;|&nbsp; 📞 +52 722 851 5016</p>
         
-        <!-- Hero Buttons -->
+        <p class="hero-bio">
+            Senior Unity Developer with <strong>7+ years of commercial production experience</strong> architecting decoupled gameplay systems, custom Editor pipelines, and asynchronous memory workflows in C#. Proven track record shipping titles across <strong>Nintendo Switch</strong> (passing strict <strong>Nintendo Lotcheck</strong> certification on first submission), <strong>Steam (PC)</strong>, and <strong>Mobile</strong>.
+        </p>
+
         <div class="buttons">
-            <a id="resumeBtn" href="resume-developer.html" target="_blank" class="btn">📥 Download Resume</a>
-            <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub</a>
+            <a href="https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=sharing" target="_blank" class="btn">📥 View / Download Resume (PDF)</a>
+            <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub Profile</a>
             <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
         </div>
 
-        <!-- Tech Stack Grid inside Header Container -->
         <div class="tech-stack">
             <div class="tech-col">
-                <h3>Core Languages</h3>
+                <h3>C# & Architecture</h3>
                 <ul>
-                    <li>C# (Expert)</li>
-                    <li>C++ (Advanced)</li>
-                    <li>Python (Tools)</li>
+                    <li>C# (.NET / Unity)</li>
+                    <li>SOLID & Clean Architecture</li>
+                    <li>Assembly Definitions (<code>.asmdef</code>)</li>
+                    <li>FSM, Strategy & Observer Patterns</li>
                 </ul>
             </div>
             <div class="tech-col">
-                <h3>Engines</h3>
+                <h3>Unity Systems</h3>
                 <ul>
-                    <li>Unity 3D</li>
-                    <li>Unreal Engine 5</li>
+                    <li>Addressables Asset Streaming</li>
+                    <li>UniTask (Zero-Alloc Async/Await)</li>
+                    <li>Custom Editor Tooling (UIElements/IMGUI)</li>
+                    <li>ScriptableObject Data Schemas</li>
                 </ul>
             </div>
             <div class="tech-col">
-                <h3>Architecture</h3>
+                <h3>Performance & Console</h3>
                 <ul>
-                    <li>SOLID Principles</li>
-                    <li>.asmdef & Modules</li>
-                    <li>Task-Based Async</li>
+                    <li>Nintendo Switch SDK (<code>nn.fs</code>, Lotcheck)</li>
+                    <li>CPU/GPU & Memory Profiling</li>
+                    <li>Draw Call & Mesh Consolidation</li>
+                    <li>Wwise Audio Middleware</li>
                 </ul>
             </div>
             <div class="tech-col">
-                <h3>Pipelines</h3>
+                <h3>Secondary Stack</h3>
                 <ul>
-                    <li>Addressables</li>
-                    <li>Nintendo Lotcheck</li>
-                    <li>Wwise Audio</li>
-                </ul>
-            </div>
-            <div class="tech-col">
-                <h3>Game Design</h3>
-                <ul>
-                    <li>Combat Balancing</li>
-                    <li>Progression Data</li>
-                    <li>Math Models</li>
+                    <li>Python (Data & Pipeline Automation)</li>
+                    <li>C++ & Unreal Engine 5 (Nanite/Lumen)</li>
+                    <li>Unity Test Framework (CLI / CI)</li>
+                    <li>URP & Shader Graph</li>
                 </ul>
             </div>
         </div>
     </header>
 
-    <!-- JavaScript to Automatically Detect Role, Update Title, Subtitle, and Button -->
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const role = urlParams.get('role') || 'developer';
-            
-            const resumeBtn = document.getElementById('resumeBtn');
-            const subtitle = document.getElementById('portfolioSubtitle');
-            const pageTitle = document.querySelector('title');
-
-            if (role === 'systems') {
-                resumeBtn.href = 'https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=sharing';
-                subtitle.textContent = 'Game Systems & Gameplay Engineer';
-                pageTitle.textContent = 'Abraham Carbajal García | Systems & Gameplay Engineer';
-            } else if (role === 'design') {
-                resumeBtn.href = 'https://drive.google.com/file/d/1s4UzWiwnAYV0H5gxP0_fbf4zjLIp2ONP/view?usp=sharing';
-                subtitle.textContent = 'Technical Game Designer';
-                pageTitle.textContent = 'Abraham Carbajal García | Technical Game Designer';
-            } else {
-                resumeBtn.href = 'https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=sharing';
-                subtitle.textContent = 'Senior Game Developer';
-                pageTitle.textContent = 'Abraham Carbajal García | Senior Game Developer';
-            }
-        });
-    </script>
-
     <main class="container">
 
-        <!-- Shipped Titles Overview -->
-        <h2 class="section-title" id="releases" style="margin-top: 0;">Commercial Releases</h2>
+        <!-- SHIPPED TITLES GRID -->
+        <h2 class="section-title" id="releases" style="margin-top: 0;">Shipped Titles & Commercial Projects</h2>
         <div class="shipped-grid">
-            
-            <!-- The 257th Element -->
             <div class="shipped-card">
-                <h4>The 257th Element</h4>
-                <span class="role">Lead Systems Developer</span>
-                <p>Nintendo Switch, PC (Steam)</p>
-                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 5px;">
-                    <a href="https://www.nintendo.com/us/store/products/the-257th-element-switch/" target="_blank" style="color: #e60012; font-size: 0.85rem; text-decoration: none; font-weight: 600;">🎮 Nintendo eShop</a>
-                    <a href="https://store.steampowered.com/app/2648640/The_257th_Element/" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600;">🔗 Steam Store</a>
+                <div>
+                    <h4>The 257th Element</h4>
+                    <span class="role">Senior Unity Systems Developer</span>
+                    <p>Shipped on Nintendo Switch & PC (Steam). Full EN/JP voice streaming, custom Editor tooling, and Lotcheck compliance.</p>
                 </div>
-            </div>
-            
-            <!-- Fate of Windshift -->
-            <div class="shipped-card">
-                <h4>Fate of Windshift</h4>
-                <span class="role">Senior Gameplay & Optimization Eng.</span>
-                <p>PC (3D Turn-Based RPG)</p>
-                <div style="margin-top: 10px;">
-                    <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600;">🔗 Steam Store</a>
+                <div class="card-links">
+                    <a href="https://www.nintendo.com/us/store/products/the-257th-element-switch/" target="_blank">🎮 Nintendo eShop ↗</a>
+                    <a href="https://store.steampowered.com/app/2648640/The_257th_Element/" target="_blank">🔗 Steam ↗</a>
                 </div>
             </div>
 
-            <!-- Windshift -->
             <div class="shipped-card">
-                <h4>Windshift</h4>
-                <span class="role">Systems Engineer</span>
-                <p>PC (Steam)</p>
-                <div style="margin-top: 10px;">
-                    <a href="https://store.steampowered.com/app/1292200/Sound_of_Windshift_sound_track_vol001/" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600;">🎵 View OST on Steam</a>
+                <div>
+                    <h4>妖百景 (One Hundred Ghost Scenes)</h4>
+                    <span class="role">Core Systems & Gameplay Programmer</span>
+                    <p>Nintendo Switch & PC. Modular turn-based combat FSM, Strategy Pattern skills, and Python-to-JSON balance pipeline.</p>
                 </div>
-            </div>
-            
-            <!-- Mobile Titles -->
-            <div class="shipped-card">
-                <h4>Bacheton</h4>
-                <span class="role">Solo Dev & Engineer</span>
-                <p>Mobile (Android Endless Runner)</p>
-                <div style="margin-top: 10px;">
-                    <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton" target="_blank" style="color: #3ddc84; font-size: 0.85rem; text-decoration: none; font-weight: 600;">📱 Bacheton - Google Play</a>
+                <div class="card-links">
+                    <a href="https://youtu.be/VImAzv9VNMA" target="_blank">▶️ Gameplay Video ↗</a>
+                    <a href="ayakashi-architecture.html" target="_blank">📐 Architecture Doc ↗</a>
                 </div>
             </div>
 
-        </div>
+            <div class="shipped-card">
+                <div>
+                    <h4>Fate of Windshift & Windshift</h4>
+                    <span class="role">Gameplay & Optimization Programmer</span>
+                    <p>Shipped on PC (Steam). Custom C# mesh-combining Editor tool reducing scene draw calls by 75% (from ~4,000 to &lt;1,000).</p>
+                </div>
+                <div class="card-links">
+                    <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank">🔗 Fate of Windshift ↗</a>
+                    <a href="https://store.steampowered.com/app/971510/Windshift/" target="_blank">🔗 Windshift ↗</a>
+                </div>
+            </div>
 
-        <!-- Combat Balancing Interactive Showcase -->
-        <div class="showcase-block">
-            <h3 style="color: #f9fafb; margin-bottom: 6px; font-size: 1.35rem;">⚔️ Data-Driven Progression & Combat Balancing</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">妖百景 (One Hundred Ghost Scenes) — Technical Game Design</p>
-
-            <p style="color: var(--text-main); line-height: 1.6; font-size: 1rem; margin-bottom: 16px;">
-                To empower rapid iteration during combat tuning, I engineered a complete data-driven progression pipeline bridging Google Sheets, Python, and Unity. By removing hard-coded values, I allowed the design team to actively balance the game's economy and pacing without requiring engineering support.
-            </p>
-
-            <ul style="color: var(--text-main); font-size: 0.95rem; padding-left: 20px; line-height: 1.6; display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
-                <li><strong style="color: #ffffff;">Interactive Balancing Tools:</strong> Authored the "Level Up" calculator suite, utilizing visual EXP curves and dropdown matrices to simulate encounters for individual players and Ayakashis.</li>
-                <li><strong style="color: #ffffff;">Python Automation:</strong> Developed custom scripts to parse STR/TEC damage formulas and hit rates, automatically serializing the data into JSON files.</li>
-                <li><strong style="color: #ffffff;">Runtime Integration:</strong> Ingested generated JSON directly into Unity's architecture, allowing instant runtime updates to leveling curves and core combat mechanics.</li>
-            </ul>
-
-            <!-- Interactive Graph (Chart.js) -->
-            <div style="padding: 20px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 6px;">
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px; text-align: center; font-weight: 600;">Interactive Progression Simulation: Accumulated EXP Curve</p>
-                <div style="position: relative; height: 300px; width: 100%;">
-                    <canvas id="expCurveChart"></canvas>
+            <div class="shipped-card">
+                <div>
+                    <h4>Bacheton</h4>
+                    <span class="role">Independent Unity Developer</span>
+                    <p>Shipped on Android (Google Play). Procedural obstacle generation, object pooling, encrypted saves, and 2D URP pipelines.</p>
+                </div>
+                <div class="card-links">
+                    <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton" target="_blank">📱 Google Play ↗</a>
                 </div>
             </div>
         </div>
 
-        <!-- Project 1: Console Architecture -->
-        <h2 class="section-title" id="console">Platform Abstraction & Save-Data Integrity</h2>
-        
+        <!-- CASE STUDY 1: THE 257TH ELEMENT -->
+        <h2 class="section-title" id="console">1. Console Compliance, Async Streaming & Custom Editor Tools</h2>
         <div class="case-study">
             <h3>The 257th Element</h3>
-            <span class="subtitle">Shipped Title | Nintendo Switch & PC | Unity, C#, Nintendo SDK, Wwise</span>
-            
-            <div class="problem-solution">
-                <p><strong>The Challenge:</strong> One Unity codebase, two platforms. On PC, persistence is simply a file write. On Nintendo Switch, every save, setting, and file-existence check must route through Nintendo's native SDK (<code>nn.fs</code>). If the system sleeps or the player exits the title part-way through a write, the save data is corrupted, causing an immediate failure during console certification.</p>
-                
-                <p><strong>The Solution:</strong> I built a UnityEvent-driven persistence layer with platform-conditional compilation. On Switch, the layer mounts a save-data volume against the preselected player account, then runs every write as an explicit <em>delete → create → open → write → commit</em> transaction. The critical section is guarded by Nintendo SDK exit requests so the OS cannot sleep or close the title mid-write.</p>
-                
-                <p><strong>The Result:</strong> Achieved rock-solid save-data integrity against mid-write power and sleep events. Delivered a single save pipeline serving both SKUs without duplicating game logic, shipping successfully against Nintendo SDK v18.3.2.</p>
+            <span class="subtitle">Shipped on Nintendo Switch & Steam | C#, Addressables, UniTask, Nintendo Switch SDK (nn.fs), Wwise, Shader Graph</span>
+
+            <div class="metrics-bar">
+                <div class="metric-box">
+                    <div class="metric-val">1st Pass</div>
+                    <div class="metric-lbl">Nintendo Lotcheck Certification</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-val">&lt; 1.5 GB</div>
+                    <div class="metric-lbl">Strict Console RAM Ceiling</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-val">Months → 2 Wks</div>
+                    <div class="metric-lbl">Dialogue & Audio Tooling Speedup</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-val">0 Leaks</div>
+                    <div class="metric-lbl">Across 6 Narrative Episodes</div>
+                </div>
             </div>
 
-            <div style="margin-bottom: 25px;">
-<pre><code class="language-csharp">// The Critical Section (NintendoManager.cs)
-#if UNITY_SWITCH
-    UnityEngine.Switch.Notification.EnterExitRequestHandlingSection();
-#endif
-
-    result = nn.fs.File.Create(filePath, data.Length);
-    result.abortUnlessSuccess();
-
-    result = nn.fs.File.Open(ref fileHandle, filePath, nn.fs.OpenFileMode.Write);
-    result.abortUnlessSuccess();
-
-    const int offset = 0;
-    result = nn.fs.File.Write(fileHandle, offset, data, data.LongLength, nn.fs.WriteOption.Flush);
-    result.abortUnlessSuccess();
-
-    nn.fs.File.Close(fileHandle);
-    
-    result = nn.fs.FileSystem.Commit(mountName);
-    result.abortUnlessSuccess();
-
-#if UNITY_SWITCH
-    UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
-#endif</code></pre>
+            <div class="problem-solution">
+                <p><strong>The Challenge:</strong> Shipping a dual-language (English/Japanese) fully voiced narrative title on Nintendo Switch under strict memory budgets and certification rules. Synchronous asset loading caused main-thread hitches, and standard file I/O does not comply with Nintendo Switch <code>nn.fs</code> atomic save-data transaction rules during OS sleep or game-exit events.</p>
+                <p><strong>The Solution:</strong> Architected a decoupled C# runtime separated via Assembly Definitions (<code>.asmdef</code>). Engineered deterministic chapter streaming using <code>Addressables</code> and <code>UniTask</code> with explicit handle release on episode transitions. Built a custom Unity Editor validation window to automate CSV/Excel dialogue parsing and Wwise audio GUID binding, alongside a transactional Nintendo Switch save system guarded against mid-write interruptions.</p>
             </div>
         </div>
 
-        <!-- Project 2: Core Systems -->
-        <h2 class="section-title" id="architecture">Systems Architecture & Data Flow</h2>
-        
+        <!-- CASE STUDY 2: AYAKASHI (WITH NEW BATTLE LEVEL UP GRAPH) -->
+        <h2 class="section-title" id="architecture">2. Modular Combat Architecture & Data-Driven Level Up Balancing</h2>
         <div class="case-study">
             <h3>妖百景 (One Hundred Ghost Scenes)</h3>
-            <span class="subtitle">Unreleased / Internal Pipeline | Battle Systems, Inventory Synchronization, State Machines</span>
-            
-            <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Designing a scalable, turn-based battle system and a robust inventory manager for a dungeon crawler where UI, combat logic, and save states must remain perfectly synchronized without race conditions.</p>
-                <p><strong>The Solution:</strong> Architected a decoupled, event-driven state machine for combat resolution. Implemented a strict data-flow hierarchy for the inventory system, utilizing ScriptableObjects for item definitions and independent controllers for UI rendering and backend save synchronization.</p>
-                <p><strong>The Result:</strong> Delivered a modular architecture where game designers could seamlessly add hundreds of new enemies, skills, and items without requiring engineering intervention or breaking existing data references.</p>
+            <span class="subtitle">Nintendo Switch & PC | C#, SOLID (.asmdef), FSM, Strategy Pattern, ScriptableObjects, Python Automation, Chart.js</span>
+
+            <div class="metrics-bar">
+                <div class="metric-box">
+                    <div class="metric-val">50+ Items/Skills</div>
+                    <div class="metric-lbl">Added with Zero C# Recompilation</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-val">O(1) Lookup</div>
+                    <div class="metric-lbl">Dictionary-Indexed Runtime Pools</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-val">100% Decoupled</div>
+                    <div class="metric-lbl">Combat Math Isolated from VFX/UI</div>
+                </div>
             </div>
-            
-            <a href="ayakashi-architecture.html" target="_blank" class="btn btn-outline" style="font-size: 0.9rem; margin-top: 10px; display: inline-block;">📄 View Architecture Document</a>
+
+            <div class="problem-solution">
+                <p><strong>The Challenge:</strong> Designing a scalable turn-based RPG combat and inventory architecture where designers could iterate on 50+ items, equipment pieces, and skill formulas without creating tight coupling between combat math, Cinemachine cameras, UI presenters, and particle VFX.</p>
+                <p><strong>The Solution:</strong> Isolated combat sequencing (<code>BtlTurnBaseManager</code>), pluggable skill calculations (<code>BtlASkillFormula</code> using the Strategy Pattern), and atomic item reservations (<code>BtlItemPool</code>) behind strict interface and event contracts. Built an automated Python serialization pipeline that converts external balancing spreadsheets directly into runtime Unity JSON schemas.</p>
+            </div>
+
+            <!-- NEW BATTLE LEVEL UP GRAPH SECTION -->
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <h4 style="color: #ffffff; font-size: 1.05rem; margin-bottom: 2px;">📊 RPG Stat Scaling & Progression Curve (Battle Level Up)</h4>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Data-driven attribute progression curves managed via ScriptableObjects & Python balance JSONs.</p>
+                    </div>
+                    <div>
+                        <select id="statSelector" onchange="updateChartDataset()" style="background: var(--bg-card); color: #ffffff; border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 0.82rem; font-family: var(--font-mono); cursor: pointer;">
+                            <option value="hp">HP Progression (Linear/Exp)</option>
+                            <option value="atk">Attack Power Curve</option>
+                            <option value="exp">XP Required per Level</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 280px; position: relative;">
+                    <canvas id="battleLevelChart"></canvas>
+                </div>
+            </div>
+
+            <div class="buttons" style="margin-top: 20px;">
+                <a href="ayakashi-architecture.html" target="_blank" class="btn">📐 Open Full 3-Page Systems Architecture Diagrams (HTML) ↗</a>
+                <a href="https://youtu.be/VImAzv9VNMA" target="_blank" class="btn btn-outline">▶️ Watch Combat Gameplay Showcase ↗</a>
+            </div>
         </div>
 
-        <!-- Project 3: UE5 ArchViz -->
-        <h2 class="section-title" id="ue5">Next-Gen Rendering & Interactive Environments</h2>
-        
+        <!-- CASE STUDY 3: FATE OF WINDSHIFT -->
+        <h2 class="section-title" id="optimization">3. Rendering Optimization & Custom Mesh-Combining Tooling</h2>
         <div class="case-study">
-            <h3>Unreal Houses: Photorealistic Virtual Tours</h3>
-            <span class="subtitle">Unreal Engine 5 | Nanite, Lumen, Blueprints</span>
-            
-            <div class="media-container" style="aspect-ratio: 16/9; margin-bottom: 25px;">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FkKWbpWVZDA" title="UE5 ArchViz Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h3>Fate of Windshift & Windshift</h3>
+            <span class="subtitle">Shipped on PC (Steam) | C#, Unity EditorWindow, Mesh API, Draw Call Batching, Frame Debugger Profiling</span>
+
+            <div class="metrics-bar">
+                <div class="metric-box">
+                    <div class="metric-val">-75% Batches</div>
+                    <div class="metric-lbl">Draw Calls (~4,000 to &lt;1,000)</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-val">Locked 60 FPS</div>
+                    <div class="metric-lbl">Open-World 3D Scene Baseline</div>
+                </div>
             </div>
 
             <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Achieving photorealistic visual fidelity and full user interactivity without spending weeks manually optimizing or retopologizing massive, raw architectural models.</p>
-                <p><strong>The Solution:</strong> Bypassed traditional LOD and optimization pipelines entirely by integrating <strong>Nanite</strong> to handle raw, unoptimized high-poly geometry natively. Configured <strong>Lumen</strong> for real-time global illumination to maximize realism, and engineered the core interactive mechanics for user exploration.</p>
-                <p><strong>The Result:</strong> Delivered a highly realistic, fully interactive architectural walkthrough driven entirely by next-gen rendering features, proving engine versatility and rapid prototyping capabilities.</p>
+                <p><strong>The Challenge:</strong> Dense 3D open-world environments suffered from severe CPU render-thread bottlenecks caused by thousands of unbatched static props and fragmented multi-material submeshes, pushing draw calls above 4,000 per frame.</p>
+                <p><strong>The Solution:</strong> Authored a custom C# Unity Editor utility using the <code>Mesh.CombineMeshes</code> API to spatially group static geometry, merge shared material submeshes, and preserve lightmap UVs and colliders non-destructively—slashing draw calls under 1,000 batches and locking a steady 60 FPS.</p>
+            </div>
+        </div>
+
+        <!-- CASE STUDY 4: UNREAL ENGINE 5 -->
+        <h2 class="section-title" id="ue5">4. Cross-Engine Versatility: Unreal Engine 5 & C++</h2>
+        <div class="case-study">
+            <h3>Real-Time 3D Interactive Architectural Walkthroughs</h3>
+            <span class="subtitle">PC Real-Time 3D | Unreal Engine 5, C++, Blueprints, Nanite Virtualized Geometry, Lumen GI</span>
+
+            <div class="video-container">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FkKWbpWVZDA" title="Unreal Engine 5 Interactive Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="problem-solution">
+                <p><strong>Engineering Implementation:</strong> Programmed interactive first-person camera locomotion, spatial inspection raycasts, and collision triggers in C++ and Blueprints while configuring Nanite virtualized micropolygon geometry and Lumen dynamic global illumination for real-time walkthroughs.</p>
             </div>
         </div>
 
     </main>
 
     <footer>
-        <p>© 2026 Abraham Carbajal García | Engineered for Global Technical Applications</p>
+        <p>© 2026 Abraham Carbajal García • Senior Unity Developer • Hosted on GitHub Pages</p>
     </footer>
 
-    <!-- Prism.js for Syntax Highlighting Scripts -->
+    <!-- Prism.js for C# Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-    
-    <!-- CHART.JS SCRIPT TO DRAW THE EXP CURVE -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const canvasElement = document.getElementById('expCurveChart');
-            if (canvasElement) {
-                const ctx = canvasElement.getContext('2d');
-                
-                const levels = Array.from({length: 20}, (_, i) => `Lv ${i + 1}`);
-                const accumulatedExp = [0, 90, 250, 500, 880, 1400, 2080, 2930, 3980, 5280, 6830, 8630, 10760, 13160, 16160, 19460, 23260, 27460, 32430, 38010];
 
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: levels,
-                        datasets: [{
-                            label: 'Total EXP Required',
-                            data: accumulatedExp,
-                            borderColor: '#8b5cf6',
-                            backgroundColor: 'rgba(139, 92, 246, 0.15)',
-                            borderWidth: 2,
-                            pointBackgroundColor: '#c4b5fd',
-                            pointBorderColor: '#111827',
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
-                            fill: true,
-                            tension: 0.4 
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                backgroundColor: '#1f2937',
-                                titleColor: '#f9fafb',
-                                bodyColor: '#d1d5db',
-                                borderColor: '#374151',
-                                borderWidth: 1,
-                                padding: 10,
-                                callbacks: {
-                                    label: function(context) {
-                                        return ` Total EXP: ${context.parsed.y.toLocaleString()}`;
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                grid: { color: '#30363d', drawBorder: false },
-                                ticks: { color: '#8b949e', font: { family: 'Inter' } }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { color: '#8b949e', font: { family: 'Inter' }, maxTicksLimit: 10 }
-                            }
-                        }
+    <!-- Chart.js Script for Battle Level Up Graph -->
+    <script>
+        const ctx = document.getElementById('battleLevelChart').getContext('2d');
+        
+        const chartData = {
+            labels: ['Lv.1', 'Lv.10', 'Lv.20', 'Lv.30', 'Lv.40', 'Lv.50', 'Lv.60', 'Lv.70', 'Lv.80', 'Lv.90', 'Lv.100'],
+            datasets: [{
+                label: 'HP Progression (Stat Curve)',
+                data: [120, 340, 780, 1450, 2400, 3650, 5200, 7100, 9400, 12200, 16000],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.3
+            }]
+        };
+
+        const chartConfigs = {
+            hp: {
+                label: 'HP Progression (Stat Curve)',
+                data: [120, 340, 780, 1450, 2400, 3650, 5200, 7100, 9400, 12200, 16000],
+                color: '#3b82f6',
+                bg: 'rgba(59, 130, 246, 0.1)'
+            },
+            atk: {
+                label: 'Attack Power Curve (Strategy Multiplier)',
+                data: [25, 65, 140, 250, 400, 600, 850, 1150, 1500, 1950, 2500],
+                color: '#10b981',
+                bg: 'rgba(16, 185, 129, 0.1)'
+            },
+            exp: {
+                label: 'XP Required per Level (Exponential Scaling)',
+                data: [100, 450, 1200, 2800, 5500, 9800, 16000, 25000, 38000, 56000, 80000],
+                color: '#8b5cf6',
+                bg: 'rgba(139, 92, 246, 0.1)'
+            }
+        };
+
+        const battleChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
                     }
-                });
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace" } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace" } }
+                    }
+                }
             }
         });
+
+        function updateChartDataset() {
+            const selectVal = document.getElementById('statSelector').value;
+            const cfg = chartConfigs[selectVal];
+            
+            battleChart.data.datasets[0].label = cfg.label;
+            battleChart.data.datasets[0].data = cfg.data;
+            battleChart.data.datasets[0].borderColor = cfg.color;
+            battleChart.data.datasets[0].backgroundColor = cfg.bg;
+            battleChart.update();
+        }
     </script>
 </body>
 </html>
