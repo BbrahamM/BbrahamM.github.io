@@ -3,785 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abraham Carbajal García | Senior Unity Developer</title>
-    <!-- Prism.js Dark Theme for C# Syntax Highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <title>Abraham Carbajal García | Console Engineer & Tools Specialist</title>
     <style>
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: #111827;
-            --bg-card-alt: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --green: #10b981;
-            --border: #1f2937;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+            --bg-base: #0d1117;
+            --bg-surface: #161b22;
+            --bg-card: #21262d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #3182ce;
+            --border-color: #30363d;
+            --success: #2ea043;
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            background-color: var(--bg-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-base);
             color: var(--text-main);
-            font-family: var(--font-sans);
             line-height: 1.6;
+            padding-top: 60px;
         }
-        /* Sticky Top Navigation */
+
+        /* Sticky Navigation */
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(11, 15, 25, 0.92);
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(13, 17, 23, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 14px 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 20px;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 24px;
+            gap: 30px;
+            z-index: 1000;
         }
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: color 0.2s;
+        nav a { color: var(--text-main); text-decoration: none; font-size: 1rem; font-weight: 600; transition: color 0.2s; }
+        nav a:hover { color: var(--accent); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header { padding: 60px 0 40px; border-bottom: 1px solid var(--border-color); text-align: center; }
+        h1 { font-size: 3rem; color: #ffffff; margin-bottom: 10px; line-height: 1.1; }
+        .hero-title { font-size: 1.4rem; color: var(--accent); margin-bottom: 20px; font-weight: bold; }
+        .hero-contact { font-size: 1rem; color: var(--text-muted); margin-bottom: 20px; }
+        .hero-intro { max-width: 800px; margin: 0 auto 30px; font-size: 1.1rem; color: var(--text-main); }
+        
+        .hero-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .hero-links a { 
+            background: var(--bg-card); color: var(--text-main); padding: 10px 20px; 
+            border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;
+            transition: all 0.2s;
         }
-        nav a:hover {
-            color: #ffffff;
-        }
-        /* Hero Header */
-        header {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 55px 24px 40px;
-            border-bottom: 1px solid var(--border);
-        }
-        .eyebrow {
-            font-family: var(--font-mono);
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #ffffff;
-        }
-        .role-subtitle {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-top: 4px;
-        }
-        .location {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 8px;
-        }
-        .hero-bio {
-            max-width: 840px;
-            color: #cbd5e1;
-            font-size: 1.02rem;
-            margin-top: 18px;
-        }
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        .btn {
-            background: var(--accent);
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.92rem;
-            transition: background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn:hover {
-            background: var(--accent-hover);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #334155;
-            color: var(--text-main);
-        }
-        .btn-outline:hover {
-            background: #1e293b;
-            border-color: #475569;
-        }
-        /* Tech Stack Grid */
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-top: 36px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .tech-col h3 {
-            font-size: 0.82rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--accent);
-            margin-bottom: 8px;
-            font-family: var(--font-mono);
-        }
-        .tech-col ul {
-            list-style: none;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-        .tech-col li {
-            margin-bottom: 4px;
-        }
-        /* Main Container */
-        .container {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 40px 24px;
-        }
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin: 45px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        /* Shipped Titles Grid */
-        .shipped-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-        .shipped-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            padding: 18px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .shipped-card h4 {
-            color: #ffffff;
-            font-size: 1.08rem;
-            margin-bottom: 4px;
-        }
-        .shipped-card .role {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.82rem;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .shipped-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-        .card-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: auto;
-        }
-        .card-links a {
-            font-size: 0.82rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: #60a5fa;
-        }
-        .card-links a:hover {
-            text-decoration: underline;
-        }
-        /* Case Studies */
-        .case-study {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 28px;
-            margin-bottom: 32px;
-        }
-        .case-study h3 {
-            color: #ffffff;
-            font-size: 1.4rem;
-            margin-bottom: 4px;
-        }
-        .case-study .subtitle {
-            font-family: var(--font-mono);
-            font-size: 0.84rem;
-            color: var(--accent);
-            margin-bottom: 18px;
-            display: block;
-        }
-        .metrics-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 12px;
-            margin-bottom: 22px;
-        }
-        .metric-box {
-            background: rgba(59, 130, 246, 0.08);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 6px;
-            padding: 12px 14px;
-        }
-        .metric-val {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #ffffff;
-            font-family: var(--font-mono);
-        }
-        .metric-lbl {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-        .problem-solution {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 22px;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-        }
-        .problem-solution strong {
-            color: #ffffff;
-        }
-        /* Visual Proof Media Grid */
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 16px;
-            margin: 22px 0;
-        }
-        .media-card {
-            background: #090d16;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+        .hero-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+        h2 { font-size: 2.2rem; color: #ffffff; margin: 60px 0 30px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+
+        /* Featured Projects */
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 40px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
-        .media-card a {
-            display: block;
+
+        .project-visual {
             width: 100%;
-            aspect-ratio: 16/9;
             background: #000;
             position: relative;
-            overflow: hidden;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
         }
-        .media-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.2s;
+        
+        /* Video Thumbnail Overlays */
+        .video-thumbnail a { display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-decoration: none; }
+        .video-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+        .video-thumbnail .play-button { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: rgba(0,0,0,0.7); color: #fff;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; transition: background 0.3s;
         }
-        .media-card a:hover img {
-            transform: scale(1.03);
+        .video-thumbnail a:hover .play-button { background: var(--accent); }
+
+        .project-visual img.static-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
         }
-        .zoom-badge {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0, 0, 0, 0.82);
-            color: #60a5fa;
-            font-size: 0.7rem;
-            font-family: var(--font-mono);
-            padding: 4px 8px;
-            border-radius: 4px;
-            border: 1px solid rgba(59, 130, 246, 0.4);
+
+        .project-content { padding: 30px; }
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        
+        /* Uniform Project Title Styling */
+        .project-title h3 { font-size: 1.8rem; color: #ffffff; margin-bottom: 5px; font-weight: bold; font-style: italic; }
+        .project-role { color: var(--text-muted); font-style: italic; font-size: 1.1rem; }
+        
+        .metrics-bar { display: flex; gap: 10px; flex-wrap: wrap; }
+        .metric-badge { background: var(--bg-card); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--accent); font-weight: bold; }
+        .metric-badge.success { color: var(--success); border-color: var(--success); }
+
+        .ownership-statement {
+            background: rgba(88, 166, 255, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0;
+            font-size: 1.05rem; color: #ffffff;
         }
-        .media-caption {
-            padding: 10px 14px;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-        }
-        .media-caption strong {
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            display: block;
-            margin-bottom: 2px;
-        }
-        /* Code Blocks */
-        .code-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-            margin-top: 22px;
-        }
-        .code-label {
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: #93c5fd;
-            margin-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
-        }
-        pre[class*="language-"] {
-            border-radius: 8px;
-            border: 1px solid #334155;
-            margin: 0 !important;
-            font-size: 0.82rem !important;
-            max-height: 460px;
-            overflow-y: auto;
-        }
-        .video-container {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 40px 24px;
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            border-top: 1px solid var(--border);
-            margin-top: 40px;
+        .ownership-statement strong { color: var(--accent); }
+
+        .project-bullets { list-style: none; margin-bottom: 20px; }
+        .project-bullets li { margin-bottom: 10px; display: flex; align-items: flex-start; }
+        .project-bullets li::before { content: "▹"; color: var(--accent); margin-right: 10px; font-weight: bold; }
+
+        /* Custom Tools Showcase */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .tool-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+        .tool-visual { height: 200px; background: #000; overflow: hidden; position: relative; }
+        .tool-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.3s; }
+        .tool-visual:hover img { opacity: 1; }
+        .tool-content { padding: 20px; }
+        .tool-content h4 { font-size: 1.3rem; color: #ffffff; margin-bottom: 10px; font-weight: bold; }
+        .tool-content p { font-size: 0.95rem; color: var(--text-muted); }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-color); margin-top: 60px; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .metrics-bar { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#about">Overview</a>
-        <a href="#releases">Shipped Titles</a>
-        <a href="#console">Custom Tools & Async C#</a>
-        <a href="#architecture">Combat & Data Architecture</a>
-        <a href="#optimization">Draw Call Tooling</a>
-        <a href="#ue5">UE5 & C++</a>
+        <a href="#projects">Featured Projects</a>
+        <a href="#tools">Custom Editor Tools</a>
+        <a href="#contact">Contact</a>
     </nav>
 
-    <header id="about">
-        <div class="eyebrow">C# Systems Architecture • Custom Unity Tooling • Console Performance</div>
-        <h1>Abraham Carbajal García</h1>
-        <div class="role-subtitle">Senior Unity Developer</div>
-        <p class="location">📍 Toluca, Mexico (CST / UTC-6) &nbsp;|&nbsp; 📧 abrahamcarbajal7@gmail.com &nbsp;|&nbsp; 📞 +52 722 851 5016</p>
+    <div class="container">
         
-        <p class="hero-bio">
-            Senior Unity Developer with <strong>7+ years of commercial production experience</strong> architecting decoupled gameplay systems, custom Editor tools, and asynchronous data pipelines in C#. Proven track record shipping titles across <strong>Nintendo Switch</strong> (passing strict <strong>Nintendo Lotcheck</strong> certification on first submission), <strong>Steam (PC)</strong>, and <strong>Mobile</strong>.
-        </p>
+        <!-- Header -->
+        <header id="contact">
+            <h1>Abraham Carbajal García</h1>
+            <div class="hero-title">Senior Unity Programmer | Console Engineer</div>
+            <p class="hero-contact">abrahamcarbajal7@gmail.com &nbsp;|&nbsp; Toluca, Mexico &nbsp;|&nbsp; +52 722 851 5016</p>
+            
+            <!-- NEW ABOUT ME SECTION -->
+            <p class="hero-intro">
+                I’m a Senior Unity Programmer specializing in console optimization and custom tooling. I’ve shipped titles to Nintendo eShop, Steam, and Google Play, and I thrive on solving strict hardware constraints with creative engineering.
+            </p>
 
-        <div class="buttons">
-            <a href="https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=drive_link" target="_blank" class="btn">📥 Resume (PDF)</a>
-            <a href="https://github.com/BbrahamM" target="_blank" class="btn btn-outline">🔗 GitHub Profile</a>
-            <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank" class="btn btn-outline">🔗 LinkedIn</a>
-            <a href="ayakashi-architecture.html" target="_blank" class="btn btn-outline">📐 Systems Architecture Doc</a>
-        </div>
-
-        <div class="tech-stack">
-            <div class="tech-col">
-                <h3>C# & Architecture</h3>
-                <ul>
-                    <li>C# (.NET / Unity)</li>
-                    <li>SOLID & Clean Architecture</li>
-                    <li>Assembly Definitions (<code>.asmdef</code>)</li>
-                    <li>FSM, Strategy & Observer Patterns</li>
-                </ul>
+            <div class="hero-links">
+                <a href="https://drive.google.com/file/d/175kH27qgDenTJizSNIOmrKOyhBcjbClg/view?usp=drive_link" target="_blank">📄 Resume (PDF)</a>
+                <a href="https://www.linkedin.com/in/abraham-carbajal-b4a597166" target="_blank">🔗 LinkedIn</a>
+                <a href="https://github.com/bbrahamm" target="_blank">💻 GitHub</a>
             </div>
-            <div class="tech-col">
-                <h3>Unity Systems & Tooling</h3>
-                <ul>
-                    <li>Custom Editor Tooling (EditorWindow)</li>
-                    <li>Addressables & Async Scene Streaming</li>
-                    <li>UniTask (Async/Await)</li>
-                    <li>ScriptableObject Data Schemas</li>
-                </ul>
-            </div>
-            <div class="tech-col">
-                <h3>Performance & Console</h3>
-                <ul>
-                    <li>Nintendo Switch SDK (<code>nn.fs</code>, Lotcheck)</li>
-                    <li>CPU/GPU & Memory Profiling</li>
-                    <li>Draw Call & Mesh Consolidation</li>
-                    <li>Wwise Audio Middleware</li>
-                </ul>
-            </div>
-            <div class="tech-col">
-                <h3>Complementary Stack</h3>
-                <ul>
-                    <li>Python (Data Pipeline Automation)</li>
-                    <li>C++ & Unreal Engine 5 (Nanite/Lumen)</li>
-                    <li>URP & Shader Graph</li>
-                    <li>Git / GitHub Workflows</li>
-                </ul>
-            </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="container">
+        <main>
+            <!-- SECTION: FEATURED PROJECTS -->
+            <h2 id="projects">Featured Projects</h2>
 
-        <!-- SHIPPED TITLES GRID -->
-        <h2 class="section-title" id="releases" style="margin-top: 0;">Shipped Titles & Commercial Projects</h2>
-        <div class="shipped-grid">
-            <div class="shipped-card">
-                <div>
-                    <h4>The 257th Element</h4>
-                    <span class="role">Senior Unity Systems Developer</span>
-                    <p>Shipped on Nintendo Switch & PC (Steam). Asynchronous scene streaming, custom Editor tooling, Wwise audio, and Lotcheck compliance.</p>
-                </div>
-                <div class="card-links">
-                    <a href="https://www.nintendo.com/us/store/products/the-257th-element-switch/" target="_blank">🎮 Nintendo eShop ↗</a>
-                    <a href="https://store.steampowered.com/app/2648640/The_257th_Element/" target="_blank">🔗 Steam ↗</a>
-                </div>
-            </div>
-
-            <div class="shipped-card">
-                <div>
-                    <h4>妖百景 (One Hundred Ghost Scenes)</h4>
-                    <span class="role">Core Systems & Gameplay Programmer</span>
-                    <p>Nintendo Switch & PC. Modular turn-based combat FSM, Strategy Pattern skills, dynamic inventory pools, and Python-to-JSON pipeline.</p>
-                </div>
-                <div class="card-links">
-                    <a href="https://youtu.be/VImAzv9VNMA" target="_blank">▶️ Gameplay Video ↗</a>
-                    <a href="ayakashi-architecture.html" target="_blank">📐 Architecture Doc ↗</a>
-                </div>
-            </div>
-
-            <div class="shipped-card">
-                <div>
-                    <h4>Fate of Windshift & Windshift</h4>
-                    <span class="role">Gameplay & Optimization Programmer</span>
-                    <p>Shipped on PC (Steam). Custom C# mesh-combining Editor tool reducing scene draw calls by 75% (from ~4,000 to &lt;1,000 batches).</p>
-                </div>
-                <div class="card-links">
-                    <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank">🔗 Fate of Windshift ↗</a>
-                    <a href="https://store.steampowered.com/app/971510/Windshift/" target="_blank">🔗 Windshift ↗</a>
-                </div>
-            </div>
-
-            <div class="shipped-card">
-                <div>
-                    <h4>Bacheton & Captain Aye Aye!</h4>
-                    <span class="role">Independent Unity Developer</span>
-                    <p>Shipped on Android (Google Play). Procedural obstacle generation, object pooling, persistent data serialization, and 2D URP pipelines.</p>
-                </div>
-                <div class="card-links">
-                    <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton" target="_blank">📱 Google Play ↗</a>
-                    <a href="https://www.youtube.com/watch?v=6cCDds0ozBc" target="_blank">▶️ URP 2D Demo ↗</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- CASE STUDY 1: THE 257TH ELEMENT -->
-        <h2 class="section-title" id="console">1. Custom Unity Editor Tooling, Shaders & Async Scene Streaming</h2>
-        <div class="case-study">
-            <h3>The 257th Element</h3>
-            <span class="subtitle">Shipped on Nintendo Switch & Steam | C#, Custom EditorWindow, SceneManager Async, Nintendo Switch SDK, Wwise, Shader Graph</span>
-
-            <div class="metrics-bar">
-                <div class="metric-box">
-                    <div class="metric-val">1st Pass</div>
-                    <div class="metric-lbl">Nintendo Lotcheck Certification</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-val">&lt; 1.5 GB</div>
-                    <div class="metric-lbl">Strict Console RAM Ceiling</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-val">Months → 2 Wks</div>
-                    <div class="metric-lbl">Dialogue & Audio Tooling Speedup</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-val">0 Leaks</div>
-                    <div class="metric-lbl">Across 6 Narrative Episodes</div>
-                </div>
-            </div>
-
-            <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Shipping a dual-language (English/Japanese) fully voiced narrative title on Nintendo Switch under strict memory budgets and certification rules. Synchronous scene and asset loading caused main-thread hitches, and manual dialogue/audio binding across thousands of lines created production bottlenecks.</p>
-                <p><strong>The Solution:</strong> Architected a decoupled C# runtime separated via Assembly Definitions (<code>.asmdef</code>). Built custom Unity Editor windows to automate spreadsheet dialogue ingestion and Wwise audio validation, procedural Shader Graph screen transitions, and an asynchronous background scene-loading pipeline that prevents main-thread stalls.</p>
-            </div>
-
-            <!-- Visual Proof: Pointing to img/ folder with automatic fallback -->
-            <div class="media-grid">
-                <div class="media-card">
-                    <a href="img/CustomTool1.png" target="_blank">
-                        <img src="img/CustomTool1.png" onerror="this.onerror=null; this.src='CustomTool1.png';" alt="Custom Unity Editor Tooling Window 1" loading="lazy">
-                        <span class="zoom-badge">🔍 Click for HD</span>
+            <!-- Project 1: The 257th Element -->
+            <div class="project-card">
+                <!-- OPTIMIZED VIDEO EMBED -->
+                <div class="project-visual video-thumbnail">
+                    <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE" target="_blank" aria-label="Play The 257th Element trailer">
+                        <!-- Replace YOUR_VIDEO_ID_HERE to fetch standard YouTube thumbnail -->
+                        <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/maxresdefault.jpg" alt="Gameplay trailer thumbnail for The 257th Element visual novel">
+                        <div class="play-button">▶</div>
                     </a>
-                    <div class="media-caption">
-                        <strong>CUSTOM EDITOR TOOL 1 (C#)</strong>
-                        Custom EditorWindow built to automate narrative asset validation, subtitle parsing, and audio binding.
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>The 257th Element</h3>
+                            <div class="project-role">Lead Unity Programmer & Console Engineer | Visual Novel (Switch/Steam)</div>
+                        </div>
+                        <div class="metrics-bar">
+                            <span class="metric-badge success">✔ Nintendo Lotcheck Passed (Dec 2025)</span>
+                            <span class="metric-badge">2,000+ Audio Files Synced</span>
+                            <span class="metric-badge">5 Chapters (1,000+ text lines)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ownership-statement">
+                        <strong>Ownership:</strong> I engineered the core SOLID Text Adventure Engine, managed the Nintendo Switch SDK integration, and executed a complete mid-production migration from Wwise to Unity Mixer.
+                    </div>
+
+                    <ul class="project-bullets">
+                        <li><strong>Engine Architecture:</strong> Developed a scalable Text Adventure Engine supporting over 1,000 text lines, multi-language parsing via Excel, and procedural Shader Graph UI transitions.</li>
+                        <li><strong>Console Certification:</strong> Successfully passed Nintendo Lotcheck by utilizing Unity Addressables to control package load orders, resolving SDK and Wwise compilation conflicts.</li>
+                        <li><strong>Audio Migration:</strong> Stripped Wwise mid-development and recreated complex volume ducking and normalization for 2,000+ voice lines natively in Unity Mixer.</li>
+                    </ul>
+                    
+                    <div class="hero-links" style="justify-content: flex-start; margin-bottom: 0;">
+                        <a href="https://www.nintendo.com/us/store/products/the-257th-element-switch/" target="_blank">Nintendo eShop ↗</a>
+                        <a href="https://store.steampowered.com/app/2648640/The_257th_Element/" target="_blank">Steam ↗</a>
                     </div>
                 </div>
-                <div class="media-card">
-                    <a href="img/CustomTool2.png" target="_blank">
-                        <img src="img/CustomTool2.png" onerror="this.onerror=null; this.src='CustomTool2.png';" alt="Custom Unity Editor Tooling Window 2" loading="lazy">
-                        <span class="zoom-badge">🔍 Click for HD</span>
+            </div>
+
+            <!-- Project 2: Thousand Souls -->
+            <div class="project-card">
+                <!-- OPTIMIZED VIDEO EMBED -->
+                <div class="project-visual video-thumbnail">
+                    <a href="https://www.youtube.com/watch?v=VImAzv9VNMA" target="_blank" aria-label="Play 妖百景 (One Hundred Ghost Scenes) trailer">
+                        <img src="https://img.youtube.com/vi/VImAzv9VNMA/maxresdefault.jpg" alt="Gameplay trailer thumbnail for 妖百景 (One Hundred Ghost Scenes) 3D Dungeon Crawler">
+                        <div class="play-button">▶</div>
                     </a>
-                    <div class="media-caption">
-                        <strong>CUSTOM EDITOR TOOL 2 (C#)</strong>
-                        Automated scene/chapter configuration and asset verification pipeline inside Unity Editor.
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>妖百景 (One Hundred Ghost Scenes)</h3>
+                            <div class="project-role">Lead Unity Programmer | 3D Dungeon Crawler (Switch Exclusive)</div>
+                        </div>
+                        <div class="metrics-bar">
+                            <span class="metric-badge">30 FPS Handheld / 60 FPS Docked</span>
+                            <span class="metric-badge">54px Texture Downscaling</span>
+                            <span class="metric-badge">Modular SOLID Architecture</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ownership-statement">
+                        <strong>Ownership:</strong> I built the adaptive AI combat system, decoupled the architecture for cross-project reuse, and led all 3D rendering optimizations for the Nintendo Switch.
+                    </div>
+
+                    <ul class="project-bullets">
+                        <li><strong>Hardware Optimization:</strong> Ensured stable FPS by downscaling background textures to 54px, generating aggressive LODs, and implementing distance-based trigger scene loading.</li>
+                        <li><strong>AI Battle System:</strong> Engineered an adaptive turn-based combat system using genetic algorithms, allowing enemies to dynamically adjust decisions based on player difficulty.</li>
+                        <li><strong>Cross-Project Modularity:</strong> Accelerated production by reusing modular cross-platform save systems and UI transitions from previous titles via strict SOLID principles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project 3: Fade of Windshift -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <img class="static-img" src="assets/windshift_gameplay.gif" alt="Animated gameplay showcase of the 3D turn-based RPG Fade of Windshift">
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Fade of Windshift & Windshift</h3>
+                            <div class="project-role">Lead Unity Programmer | 3D Turn-Based RPG (Steam/Switch)</div>
+                        </div>
+                        <div class="metrics-bar">
+                            <span class="metric-badge">< 1,000 Batches / 60 FPS</span>
+                            <span class="metric-badge">Managed 2 Level Designers</span>
+                            <span class="metric-badge">20+ 3D Maps & 50+ Enemies</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ownership-statement">
+                        <strong>Ownership:</strong> I directed the programming and level design teams, engineered a custom mesh combination tool to hit 60 FPS on low-spec PCs, and refactored a 12,000-line legacy combat codebase.
+                    </div>
+
+                    <ul class="project-bullets">
+                        <li><strong>Team Leadership:</strong> Directed a 3D turn-based RPG featuring over 20 maps, directly managing and supervising two level designers.</li>
+                        <li><strong>Legacy Refactoring:</strong> Successfully untangled a 12,000-line combat codebase to implement custom boss mechanics with Unity particle systems and repair game-breaking progression bugs.</li>
+                        <li><strong>Switch Porting:</strong> Updated the project in 2024 to function correctly on Nintendo Switch hardware by fixing critical core loops.</li>
+                    </ul>
+                    
+                    <div class="hero-links" style="justify-content: flex-start; margin-bottom: 0;">
+                        <a href="https://store.steampowered.com/app/1096360/Fate_of_WINDSHIFT/" target="_blank">Steam Page ↗</a>
                     </div>
                 </div>
-                <div class="media-card">
-                    <a href="img/Transitions-ezgif.gif" target="_blank">
-                        <img src="img/Transitions-ezgif.gif" onerror="this.onerror=null; this.src='Transitions-ezgif.gif';" alt="Real-Time Shader Transition GIF" loading="lazy">
-                        <span class="zoom-badge">▶️ GIF in Action</span>
-                    </a>
-                    <div class="media-caption">
-                        <strong>REAL-TIME SHADER TRANSITION</strong>
-                        Procedural screen dissolve and transition shader executing at 60 FPS in engine.
+            </div>
+
+            <!-- Project 4: Bacheton -->
+            <div class="project-card">
+                <div class="project-visual" style="padding-bottom: 40%;"> 
+                    <img class="static-img" src="assets/bacheton_gameplay.jpg" alt="Gameplay screenshot of Bacheton, a mobile endless runner showing traffic AI and day/night cycle">
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">
+                            <h3>Bacheton</h3>
+                            <div class="project-role">Independent Game Developer | Mobile Endless Runner (Android)</div>
+                        </div>
+                        <div class="metrics-bar">
+                            <span class="metric-badge success">Shipped in 3 Months</span>
+                            <span class="metric-badge">Active on Google Play Store</span>
+                            <span class="metric-badge">Unity Ads Monetization</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ownership-statement">
+                        <strong>Ownership:</strong> As a solo developer, I built all gameplay mechanics, dynamic difficulty algorithms, and integrated ad monetization from scratch.
+                    </div>
+
+                    <ul class="project-bullets">
+                        <li><strong>Rapid Development:</strong> Developed and independently published a mobile endless runner on the Google Play Store within a strict 3-month development cycle.</li>
+                        <li><strong>Gameplay Systems:</strong> Implemented a dynamic difficulty scaling algorithm based on distance traveled, alongside autonomous traffic AI interactions.</li>
+                        <li><strong>Environment:</strong> Programmed dynamic day and night lighting cycles mapped to progression speed.</li>
+                    </ul>
+                    
+                    <div class="hero-links" style="justify-content: flex-start; margin-bottom: 0;">
+                        <a href="https://play.google.com/store/apps/details?id=com.AKDev.Bacheton" target="_blank">Google Play Store ↗</a>
                     </div>
                 </div>
-                <div class="media-card">
-                    <a href="img/Shader1.png" target="_blank">
-                        <img src="img/Shader1.png" onerror="this.onerror=null; this.src='Shader1.png';" alt="Unity Shader Graph Transition Architecture" loading="lazy">
-                        <span class="zoom-badge">🔍 Click for HD</span>
-                    </a>
-                    <div class="media-caption">
-                        <strong>SHADER GRAPH ARCHITECTURE</strong>
-                        Node graph for procedural screen dissolves and UV-mapped narrative transitions.
+            </div>
+
+            <!-- SECTION: CUSTOM EDITOR TOOLS SHOWCASE -->
+            <h2 id="tools">Custom Editor Tools & Pipelines Showcase</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem;">Recruiters and Technical Directors: Here is a look at the custom C# tooling I engineer to eliminate production bottlenecks, automate workflows, and hit strict hardware performance targets.</p>
+
+            <div class="tools-grid">
+                <!-- Tool 1 -->
+                <div class="tool-card">
+                    <div class="tool-visual">
+                        <img src="assets/localization_tool.gif" alt="Animated GIF showing the Custom Unity Editor UI for automating English/Japanese localization validation">
+                    </div>
+                    <div class="tool-content">
+                        <h4>Automated Localization UI</h4>
+                        <p>Built a custom Unity Editor UI to compare English and Japanese dialogue arrays. This tool automatically parsed Excel changes, highlighted discrepancies, and allowed for rapid text replacement, fixing synchronization bugs across 2,000+ audio files.</p>
+                    </div>
+                </div>
+
+                <!-- Tool 2 -->
+                <div class="tool-card">
+                    <div class="tool-visual">
+                        <img src="assets/mesh_combiner.gif" alt="Animated GIF demonstrating the Draw-Call Mesh Combiner Editor Tool merging static geometries">
+                    </div>
+                    <div class="tool-content">
+                        <h4>Draw-Call Mesh Combiner</h4>
+                        <p>Engineered a custom Unity Editor Mesh combination tool for the level design team. It spatially grouped static geometry and merged submeshes, strictly keeping environments under 1,000 batches to hit 60 FPS on low-spec PCs.</p>
+                    </div>
+                </div>
+
+                <!-- Tool 3 -->
+                <div class="tool-card">
+                    <div class="tool-visual">
+                        <img src="assets/audio_migration.png" alt="Screenshot showing the custom Unity Editor tool used for Wwise to Unity Mixer audio migration and synchronization">
+                    </div>
+                    <div class="tool-content">
+                        <h4>Audio Migration Pipeline</h4>
+                        <p>Created a custom tool to compare original and newly-recorded Japanese audio files to instantly detect and correct pitch/speed playback errors after migrating the entire audio pipeline from Wwise to Unity Mixer mid-production.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Code Proof 1: Extracted Scene Streaming Code -->
-            <div class="code-grid">
-                <div>
-                    <div class="code-label">
-                        <span>Asynchronous Additive Scene Streaming & Event Callback</span>
-                        <span>C# / The 257th Element</span>
-                    </div>
-<pre><code class="language-csharp">// Non-blocking additive background scene loading with event notification to prevent main-thread stalls on Switch
-private IEnumerator LoadSceneBackground(string sceneToLoad, int sceneIndex = 0)
-{
-    int currentNumberOfScenes = SceneManager.sceneCount;
-    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+        </main>
 
-    while (!asyncLoad.isDone || SceneManager.sceneCount == currentNumberOfScenes)
-    {
-        yield return null;
-    }
-
-    backgroundsLoaded[sceneIndex] = SceneManager.GetSceneByName(sceneToLoad);
-    OnSceneLoaded(EventArgs.Empty);
-}
-
-protected virtual void OnSceneLoaded(EventArgs e)
-{
-    EventHandler handler = loadSceneHandler;
-    handler?.Invoke(this, e);
-}</code></pre>
-                </div>
-            </div>
-        </div>
-
-        <!-- CASE STUDY 2: AYAKASHI (WITH YOUR REAL BtlSkill.cs SCRIPT) -->
-        <h2 class="section-title" id="architecture">2. Modular Combat Architecture & Pluggable Skill Systems</h2>
-        <div class="case-study">
-            <h3>妖百景 (One Hundred Ghost Scenes)</h3>
-            <span class="subtitle">Nintendo Switch & PC | C#, SOLID (.asmdef), FSM, Strategy Pattern, ScriptableObjects, UnityEvents</span>
-
-            <div class="metrics-bar">
-                <div class="metric-box">
-                    <div class="metric-val">50+ Items/Skills</div>
-                    <div class="metric-lbl">Added with Zero C# Recompilation</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-val">O(1) Lookup</div>
-                    <div class="metric-lbl">Dictionary-Indexed Runtime Pools</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-val">100% Decoupled</div>
-                    <div class="metric-lbl">Combat Math Isolated from VFX/UI</div>
-                </div>
-            </div>
-
-            <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Engineering a scalable turn-based RPG combat and inventory architecture where 50+ items, equipment pieces, and skill formulas could be integrated and iterated upon without creating tight coupling between combat math, Cinemachine cameras, UI presenters, and particle VFX.</p>
-                <p><strong>The Solution:</strong> Isolated turn sequencing (<code>BtlTurnBaseManager</code>), pluggable skill definitions (<code>BtlSkill</code> composing <code>BtlASkillFormula</code> via the Strategy Pattern and <code>UnityEvent</code> callbacks), and atomic item reservations (<code>BtlItemPool</code>). Automated external spreadsheet ingestion into runtime Unity JSON schemas using Python.</p>
-            </div>
-
-            <!-- Code Proof 2: Your Real BtlSkill.cs Production Script -->
-            <div class="code-grid">
-                <div>
-                    <div class="code-label">
-                        <span>BtlSkill.cs — ScriptableObject Skill Definition, Strategy Formula Injection & AI Scoring</span>
-                        <span>C# / 妖百景 Production Code</span>
-                    </div>
-<pre><code class="language-csharp">using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-
-[CreateAssetMenu(fileName = "BtlSkill", menuName = "Scriptable Objects/Battle Manager/Skills/Skill")]
-public class BtlSkill : ScriptableObject
-{
-    [SerializeField] private SKName skillName;
-    [SerializeField] private SkillKind skillKind;
-    [SerializeField] private CharacterKind whatAttacks;
-    [SerializeField] private SkillEffect skillEffect;
-    [SerializeField] private List&lt;Use&gt; whereToUse;
-    [SerializeField] private float skillAttackPower = 0f;
-    [SerializeField] private float skillManaCost = 0f;
-    [SerializeField] private float skillOrderOfAction = 3f;
-    [SerializeField] private UnityEvent&lt;BtlMCharacterManager, BtlMCharacterManager&gt; applyDamage;
-
-    [HideInInspector] public BtlMCharacterManager characterManager;
-
-    [SerializeField] private string[] modifiers;
-    [SerializeField] private SkillDescription[] description;
-    [SerializeField] private GameObject effect;
-    [SerializeField] private int targetNumber = 1;
-    [SerializeField] private bool targetAll = false;
-    [SerializeField] private bool alive = true;
-    [SerializeField] private bool stackable = false;
-    [SerializeField] private SkillExtraEffect statusEffectConfig = new();
-    [SerializeField] private BtlASkillFormula formula;
-
-    public string SKNAME =&gt; skillName.NAMES[(int)BattleManager._instance.BMLANGUAGE];
-    public string SKENNAME =&gt; skillName.NAMES[0];
-    public SkillKind SkillKind { get =&gt; skillKind; set =&gt; skillKind = value; }
-    public float SKPWR =&gt; skillAttackPower;
-    public float SKMPCOST =&gt; skillManaCost;
-
-    public void Apply(BtlMCharacterManager target)
-    {
-        applyDamage?.Invoke(BattleManager._instance.Attacker, target);
-    }
-
-    public float Test(BtlMCharacterManager target)
-    {
-        return formula.Test(BattleManager._instance.Attacker, target);
-    }
-
-    public string[] SKModifiers { get =&gt; modifiers; set =&gt; modifiers = value; }
-    public CharacterKind SKMWhatAttacks =&gt; whatAttacks;
-    public SkillDescription[] SKDescriptions =&gt; description;
-    public GameObject SKANIM =&gt; effect;
-    public int SKTargetNumber =&gt; targetNumber;
-    public bool SKTargetAll =&gt; targetAll;
-    public bool SKAlive =&gt; alive;
-    public SkillEffect SKEFFECT =&gt; skillEffect;
-    public SkillExtraEffect SKEXTRAEFFECT =&gt; statusEffectConfig;
-    public bool SKSTACKABLE =&gt; stackable;
-    public float SKORDEROFACTION =&gt; skillOrderOfAction;
-    public List&lt;Use&gt; SKWHERETOUSE =&gt; whereToUse;
-    public BtlASkillFormula FORMULA =&gt; formula;
-}
-
-[Serializable]
-public class SkillDescription
-{
-    public DescriptionType WhereToUse = DescriptionType.MAP;
-    public string Description = string.Empty;
-}
-
-public enum DescriptionType { MAP, BATTLE }
-public enum SkillKind { BASIC, MAGIC, SPECIAL, ITEM, ESCAPE }
-public enum SkillEffect { ATTACK, HEAL, BUFF, DEBUFF, CROWDCONTROL, DEFENSE }
-
-[Serializable]
-public class SkillExtraEffect
-{
-    public string effectKey = "normal";
-    public float baseScoreValue = 1f;
-    public bool stackable = false;
-    public float duplicatePenalty = 0.5f;
-    public float duration = 1f;
-    public float potency = 1f;
-    public string thinking = "none";
-}
-
-[Serializable]
-public class SKName
-{
-    public string[] NAMES;
-}</code></pre>
-                </div>
-            </div>
-
-            <div class="buttons" style="margin-top: 22px;">
-                <a href="ayakashi-architecture.html" target="_blank" class="btn">📐 Open Full 3-Page Systems Architecture Diagrams (UML / HTML) ↗</a>
-                <a href="https://youtu.be/VImAzv9VNMA" target="_blank" class="btn btn-outline">▶️ Watch Combat Gameplay Showcase ↗</a>
-            </div>
-        </div>
-
-        <!-- CASE STUDY 3: FATE OF WINDSHIFT -->
-        <h2 class="section-title" id="optimization">3. Rendering Optimization & Custom Mesh-Combining Tooling</h2>
-        <div class="case-study">
-            <h3>Fate of Windshift & Windshift</h3>
-            <span class="subtitle">Shipped on PC (Steam) | C#, Unity EditorWindow, Mesh API, Draw Call Batching, Frame Debugger Profiling</span>
-
-            <div class="metrics-bar">
-                <div class="metric-box">
-                    <div class="metric-val">-75% Batches</div>
-                    <div class="metric-lbl">Draw Calls (~4,000 to &lt;1,000)</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-val">Locked 60 FPS</div>
-                    <div class="metric-lbl">Open-World 3D Scene Baseline</div>
-                </div>
-            </div>
-
-            <div class="problem-solution">
-                <p><strong>The Challenge:</strong> Dense 3D open-world environments suffered from severe CPU render-thread bottlenecks caused by thousands of unbatched static props and fragmented multi-material submeshes, pushing draw calls above 4,000 per frame.</p>
-                <p><strong>The Solution:</strong> Authored a custom C# Unity Editor utility using the <code>Mesh.CombineMeshes</code> API to spatially group static geometry, merge shared material submeshes, and preserve lightmap UVs and colliders non-destructively—slashing draw calls under 1,000 batches and locking a steady 60 FPS.</p>
-            </div>
-
-            <div class="buttons" style="margin-top: 14px;">
-                <a href="https://www.youtube.com/watch?v=qdan6jRXv_4" target="_blank" class="btn btn-outline">▶️ Watch Optimization Demo (Scene vs Game View) ↗</a>
-            </div>
-        </div>
-
-        <!-- CASE STUDY 4: UNREAL ENGINE 5 -->
-        <h2 class="section-title" id="ue5">4. Cross-Engine Versatility: Unreal Engine 5 & C++</h2>
-        <div class="case-study">
-            <h3>Real-Time 3D Interactive Architectural Walkthroughs</h3>
-            <span class="subtitle">PC Real-Time 3D | Unreal Engine 5, C++, Blueprints, Nanite Virtualized Geometry, Lumen GI</span>
-
-            <div class="video-container">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FkKWbpWVZDA" title="Unreal Engine 5 Interactive Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <div class="problem-solution">
-                <p><strong>Engineering Implementation:</strong> Programmed interactive first-person camera locomotion, spatial inspection raycasts, and collision triggers in C++ and Blueprints while configuring Nanite virtualized micropolygon geometry and Lumen dynamic global illumination for real-time walkthroughs.</p>
-            </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>© 2026 Abraham Carbajal García • Senior Unity Developer • Hosted on GitHub Pages</p>
-    </footer>
-
-    <!-- Prism.js for C# Syntax Highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+        <footer>
+            <p>© 2026 Abraham Carbajal García • Senior Unity Programmer • Hosted on GitHub Pages</p>
+        </footer>
+    </div>
 </body>
 </html>
